@@ -6,6 +6,7 @@ remediation**.
 
 [A2Z SOC](https://a2zsoc.com) · [Architecture](docs/architecture.md) ·
 [Controls](docs/control-catalog.md) · [Recovery assurance](docs/recovery-assurance.md) ·
+[Change assurance](docs/change-assurance.md) ·
 [Service catalog](docs/service-catalog.md)
 
 ## Why this exists
@@ -27,6 +28,7 @@ This repository is the integration plane for that operating model. It currently 
 - an opt-in, read-only Azure CLI acquisition adapter for five evidence sources;
 - evidence receipts containing scope, timestamps, query identity, adapter version and hashes;
 - recovery contracts, dependency ordering, RTO/RPO evaluation and drill economics;
+- progressive infrastructure-change gates using workload health and financial intent;
 - synthetic fixtures and tests that do not misrepresent a live Azure deployment.
 
 ## Demonstrated workflow
@@ -101,6 +103,24 @@ PYTHONPATH=src python -m azure_msp.recovery_cli \
 The fixture deliberately breaches RTO and RPO and fails its synthetic checkout transaction. It
 therefore demonstrates failure detection, not successful Azure recoverability. The engine rejects
 missing approvals, non-isolated drills, prohibited production failover and dependency cycles.
+
+## Change assurance proof
+
+Replay a synthetic Azure database-downsizing rollout:
+
+```bash
+PYTHONPATH=src python -m azure_msp.change_cli \
+  examples/change-contract.json \
+  examples/change-observations.json \
+  --approval workload-owner \
+  --approval cloud-operations \
+  --approval financial-owner \
+  --output evidence/change-report.json
+```
+
+The test ring passes. The canary breaches latency, error-rate and transaction-success thresholds,
+so production promotion is halted, rollback is required and the proposed saving remains unrealized.
+This replay does not execute an infrastructure deployment.
 
 The fixture intentionally contains an unmonitored VM, a stale patch assessment, incomplete
 ownership and a publicly reachable storage account. The engine emits findings and proposals but

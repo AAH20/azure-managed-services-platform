@@ -1,0 +1,31 @@
+{
+  "change_id": "pr-184",
+  "customer_id": "contoso-demo",
+  "workload_id": "checkout",
+  "intent": {"expected_monthly_saving_usd": 1200},
+  "risk": {
+    "production": true,
+    "monitoring_verified": true,
+    "recovery_verified": true,
+    "rollback_steps": [
+      "Revert the reviewed infrastructure commit.",
+      "Restore the previous database SKU.",
+      "Repeat checkout and telemetry validation."
+    ]
+  },
+  "deployment": {"rings": ["test", "canary", "production"]},
+  "approval": {"required": ["workload-owner", "cloud-operations", "financial-owner"]},
+  "validation": {
+    "maximum_p95_latency_ms": 250,
+    "maximum_error_rate_pct": 0.5,
+    "minimum_transaction_success_pct": 99.5
+  },
+  "operations": [
+    {
+      "resource_id": "/subscriptions/demo/resourceGroups/prod/providers/Microsoft.DBforPostgreSQL/flexibleServers/orders-db",
+      "action": "update",
+      "before": {"sku": "Standard_D4ds_v5"},
+      "after": {"sku": "Standard_D2ds_v5"}
+    }
+  ]
+}

@@ -29,3 +29,11 @@ jobs:
           --approval workload-owner
           --approval cloud-operations
           --output /tmp/recovery-report.json
+      - run: >-
+          python -m azure_msp.change_cli
+          examples/change-contract.json
+          examples/change-observations.json
+          --approval workload-owner
+          --approval cloud-operations
+          --approval financial-owner
+          --output /tmp/change-report.json

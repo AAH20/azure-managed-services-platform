@@ -1,0 +1,19 @@
+{
+  "evidence_class": "synthetic",
+  "observations": [
+    {
+      "ring": "test",
+      "p95_latency_ms": 170,
+      "error_rate_pct": 0.1,
+      "transaction_success_pct": 100,
+      "observed_monthly_cost_usd": 720
+    },
+    {
+      "ring": "canary",
+      "p95_latency_ms": 420,
+      "error_rate_pct": 1.7,
+      "transaction_success_pct": 96.8,
+      "observed_monthly_cost_usd": 720
+    }
+  ]
+}
