@@ -7,6 +7,7 @@ remediation**.
 [A2Z SOC](https://a2zsoc.com) · [Architecture](docs/architecture.md) ·
 [Controls](docs/control-catalog.md) · [Recovery assurance](docs/recovery-assurance.md) ·
 [Change assurance](docs/change-assurance.md) ·
+[Incident revenue protection](docs/incident-revenue-protection.md) ·
 [Service catalog](docs/service-catalog.md)
 
 ## Why this exists
@@ -29,6 +30,7 @@ This repository is the integration plane for that operating model. It currently 
 - evidence receipts containing scope, timestamps, query identity, adapter version and hashes;
 - recovery contracts, dependency ordering, RTO/RPO evaluation and drill economics;
 - progressive infrastructure-change gates using workload health and financial intent;
+- incident signal correlation, recovery authority and transaction-based restoration proof;
 - synthetic fixtures and tests that do not misrepresent a live Azure deployment.
 
 ## Demonstrated workflow
@@ -121,6 +123,25 @@ PYTHONPATH=src python -m azure_msp.change_cli \
 The test ring passes. The canary breaches latency, error-rate and transaction-success thresholds,
 so production promotion is halted, rollback is required and the proposed saving remains unrealized.
 This replay does not execute an infrastructure deployment.
+
+## Incident revenue-protection proof
+
+Replay the synthetic checkout incident caused by the rejected database downsizing:
+
+```bash
+PYTHONPATH=src python -m azure_msp.incident_cli \
+  examples/incident-contract.json \
+  examples/incident-evidence.json \
+  --action rollback_deployment \
+  --approval workload-owner \
+  --approval cloud-operations \
+  --output evidence/incident-report.json
+```
+
+Four raw signals collapse into three symptoms. Read-only diagnostic evidence identifies the linked
+database change, and the synthetic rollback observation restores checkout health in 18 minutes.
+The reported margin exposure is an estimate; verified financial loss remains unknown. The replay
+authorizes but does not execute the rollback, and reports zero cloud mutations.
 
 The fixture intentionally contains an unmonitored VM, a stale patch assessment, incomplete
 ownership and a publicly reachable storage account. The engine emits findings and proposals but

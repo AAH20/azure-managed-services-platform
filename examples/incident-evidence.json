@@ -1,0 +1,65 @@
+{
+  "evidence_class": "synthetic",
+  "signals": [
+    {
+      "signal_id": "appinsights-latency-1",
+      "workload_id": "checkout",
+      "source": "application-insights",
+      "symptom": "database-latency",
+      "observed_value": 420,
+      "threshold": 250,
+      "minute": 0
+    },
+    {
+      "signal_id": "prometheus-latency-1",
+      "workload_id": "checkout",
+      "source": "prometheus",
+      "symptom": "database-latency",
+      "observed_value": 408,
+      "threshold": 250,
+      "minute": 1
+    },
+    {
+      "signal_id": "checkout-errors-1",
+      "workload_id": "checkout",
+      "source": "application-insights",
+      "symptom": "checkout-error-rate",
+      "observed_value": 1.7,
+      "threshold": 0.5,
+      "minute": 1
+    },
+    {
+      "signal_id": "synthetic-checkout-1",
+      "workload_id": "checkout",
+      "source": "synthetic-monitor",
+      "symptom": "transaction-success",
+      "observed_value": 96.8,
+      "threshold": 99.5,
+      "minute": 2
+    }
+  ],
+  "diagnostics": [
+    {
+      "diagnostic_id": "deployment-history",
+      "effect": "read",
+      "observation": "Database SKU changed from Standard_D4ds_v5 to Standard_D2ds_v5 before degradation.",
+      "supports_hypothesis": "database downsizing exhausted compute capacity",
+      "verified_cause": false,
+      "verification_method": null
+    },
+    {
+      "diagnostic_id": "database-metrics",
+      "effect": "read",
+      "observation": "CPU saturation began after the SKU change and ended in the rollback replay.",
+      "supports_hypothesis": "database downsizing exhausted compute capacity",
+      "verified_cause": true,
+      "verification_method": "controlled_intervention"
+    }
+  ],
+  "restoration": {
+    "minute": 18,
+    "p95_latency_ms": 185,
+    "error_rate_pct": 0.2,
+    "transaction_success_pct": 99.8
+  }
+}

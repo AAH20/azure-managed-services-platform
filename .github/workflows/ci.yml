@@ -37,3 +37,11 @@ jobs:
           --approval cloud-operations
           --approval financial-owner
           --output /tmp/change-report.json
+      - run: >-
+          python -m azure_msp.incident_cli
+          examples/incident-contract.json
+          examples/incident-evidence.json
+          --action rollback_deployment
+          --approval workload-owner
+          --approval cloud-operations
+          --output /tmp/incident-report.json

@@ -1,0 +1,27 @@
+{
+  "incident_id": "inc-2026-0042",
+  "customer_id": "contoso-demo",
+  "workload_id": "checkout",
+  "linked_change_id": "pr-184",
+  "business_context": {
+    "normal_transactions_per_minute": 12,
+    "contribution_margin_per_transaction_usd": 18
+  },
+  "objectives": {"restore_minutes": 30},
+  "restoration_health": {
+    "maximum_p95_latency_ms": 250,
+    "maximum_error_rate_pct": 0.5,
+    "minimum_transaction_success_pct": 99.5
+  },
+  "authority": {
+    "automatic": [
+      "query_logs",
+      "inspect_resource_health",
+      "inspect_recent_deployments",
+      "execute_synthetic_transaction"
+    ],
+    "approval_required": ["rollback_deployment", "restart_workload", "resize_database"],
+    "prohibited": ["delete_resource", "disable_logging", "modify_identity_owner"],
+    "required_approvers": ["workload-owner", "cloud-operations"]
+  }
+}
