@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
+from datetime import UTC, datetime
 from typing import Any
 
 
@@ -52,3 +53,80 @@ class ChangeProposal:
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
+
+@dataclass(frozen=True)
+class Customer:
+    customer_id: str
+    name: str
+    tenant_id: str
+
+
+@dataclass(frozen=True)
+class Workload:
+    workload_id: str
+    customer_id: str
+    name: str
+    owner: str
+    criticality: str
+    monthly_revenue_usd: float
+    slo_pct: float
+    rto_minutes: int
+    rpo_minutes: int
+    resource_ids: tuple[str, ...]
+
+
+@dataclass
+class WorkItem:
+    work_item_id: str
+    customer_id: str
+    workload_id: str
+    proposal: ChangeProposal
+    priority_score: float
+    estimated_monthly_exposure_usd: float
+    status: str = "proposed"
+
+    def to_dict(self) -> dict[str, Any]:
+        value = asdict(self)
+        value["proposal"] = self.proposal.to_dict()
+        return value
+
+
+@dataclass(frozen=True)
+class AuditEvent:
+    event_id: str
+    customer_id: str
+    work_item_id: str
+    actor: str
+    action: str
+    previous_status: str
+    new_status: str
+    reason: str
+    recorded_at: str
+
+    @classmethod
+    def create(
+        cls,
+        *,
+        event_id: str,
+        customer_id: str,
+        work_item_id: str,
+        actor: str,
+        action: str,
+        previous_status: str,
+        new_status: str,
+        reason: str,
+    ) -> "AuditEvent":
+        return cls(
+            event_id=event_id,
+            customer_id=customer_id,
+            work_item_id=work_item_id,
+            actor=actor,
+            action=action,
+            previous_status=previous_status,
+            new_status=new_status,
+            reason=reason,
+            recorded_at=datetime.now(UTC).isoformat(),
+        )
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)

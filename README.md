@@ -20,6 +20,9 @@ This repository is the integration plane for that operating model. It currently 
 - a dependency-free Python control evaluator;
 - deterministic operational KPIs;
 - review-gated change proposals with validation and rollback contracts;
+- business-service grouping and financial-exposure prioritization;
+- tenant-bound approval state transitions with audit events;
+- a responsive customer-facing HTML operations report;
 - synthetic fixtures and tests that do not misrepresent a live Azure deployment.
 
 ## Demonstrated workflow
@@ -52,8 +55,13 @@ For a dependency-free smoke test:
 
 ```bash
 PYTHONPATH=src python tests/run_smoke.py
-PYTHONPATH=src python -m azure_msp.cli examples/customer-inventory.json --output evidence/report.json
+PYTHONPATH=src python -m azure_msp.cli examples/customer-inventory.json \
+  --output evidence/report.json \
+  --html evidence/customer-report.html
 ```
+
+Open `evidence/customer-report.html` locally to inspect the customer operations view. The displayed
+revenue and exposure values are synthetic prioritization inputs, not validated customer losses.
 
 The fixture intentionally contains an unmonitored VM, a stale patch assessment, incomplete
 ownership and a publicly reachable storage account. The engine emits findings and proposals but

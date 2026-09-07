@@ -1,13 +1,34 @@
 {
   "source": "synthetic-azure-resource-graph-fixture",
   "evidence_class": "synthetic",
+  "customer": {
+    "customer_id": "contoso-demo",
+    "name": "Contoso Commerce (synthetic)",
+    "tenant_id": "00000000-0000-0000-0000-000000000000"
+  },
+  "workloads": [
+    {
+      "workload_id": "checkout",
+      "name": "Online checkout",
+      "owner": "commerce-platform@example.invalid",
+      "criticality": "mission-critical",
+      "monthly_revenue_usd": 400000,
+      "slo_pct": 99.95,
+      "rto_minutes": 30,
+      "rpo_minutes": 5
+    }
+  ],
   "resources": [
     {
       "id": "/subscriptions/demo/resourceGroups/prod/providers/Microsoft.Compute/virtualMachines/api-01",
       "name": "api-01",
       "type": "Microsoft.Compute/virtualMachines",
       "location": "westeurope",
-      "tags": {"environment": "production", "costCenter": "commerce"},
+      "tags": {
+        "environment": "production",
+        "costCenter": "commerce",
+        "workload": "checkout"
+      },
       "properties": {
         "monitoringEnabled": false,
         "backupEnabled": true,
@@ -22,10 +43,10 @@
       "tags": {
         "owner": "platform@example.invalid",
         "environment": "production",
-        "costCenter": "commerce"
+        "costCenter": "commerce",
+        "workload": "checkout"
       },
       "properties": {"publicNetworkAccess": "Enabled"}
     }
   ]
 }
-
