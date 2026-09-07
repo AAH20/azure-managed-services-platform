@@ -1,0 +1,37 @@
+{
+  "customer_id": "contoso-demo",
+  "workload_id": "checkout",
+  "monthly_revenue_usd": 400000,
+  "objectives": {"rto_minutes": 30, "rpo_minutes": 5},
+  "approval": {
+    "isolated_network_required": true,
+    "production_failover_allowed": false,
+    "required_approvers": ["workload-owner", "cloud-operations"]
+  },
+  "components": [
+    {
+      "component_id": "private-dns",
+      "kind": "network",
+      "depends_on": [],
+      "validation": ["dns_resolution"]
+    },
+    {
+      "component_id": "key-vault",
+      "kind": "identity",
+      "depends_on": ["private-dns"],
+      "validation": ["managed_identity_access", "certificate_validity"]
+    },
+    {
+      "component_id": "orders-db",
+      "kind": "data",
+      "depends_on": ["private-dns", "key-vault"],
+      "validation": ["database_consistency"]
+    },
+    {
+      "component_id": "checkout-api",
+      "kind": "compute",
+      "depends_on": ["orders-db", "key-vault"],
+      "validation": ["application_health", "synthetic_transaction", "telemetry_delivery"]
+    }
+  ]
+}

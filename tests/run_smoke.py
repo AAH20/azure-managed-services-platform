@@ -7,6 +7,7 @@ from azure_msp.azure_evidence import collect_baseline
 from azure_msp.evaluator import evaluate, kpis, proposals
 from azure_msp.models import Customer, Resource
 from azure_msp.operations import TenantBoundaryError, build_work_queue, build_workloads, transition
+from azure_msp.recovery import DrillEvent, RecoveryContract, evaluate_drill, recovery_order
 
 
 def main() -> None:
@@ -70,6 +71,35 @@ def main() -> None:
     assert len(observations) == 5
     assert all(item.status == "observed" for item in observations)
     assert all(item.receipt.raw_sha256 for item in observations)
+
+    recovery_contract = RecoveryContract.from_dict(
+        {
+            "customer_id": "test",
+            "workload_id": "service",
+            "monthly_revenue_usd": 10000,
+            "objectives": {"rto_minutes": 10, "rpo_minutes": 5},
+            "approval": {
+                "isolated_network_required": True,
+                "production_failover_allowed": False,
+                "required_approvers": ["owner"],
+            },
+            "components": [
+                {
+                    "component_id": "database",
+                    "kind": "data",
+                    "depends_on": [],
+                    "validation": ["consistency"],
+                }
+            ],
+        }
+    )
+    assert recovery_order(recovery_contract) == ["database"]
+    recovery_report = evaluate_drill(
+        recovery_contract,
+        [DrillEvent("database", 0, 4, 2, {"consistency": True}, 0.5)],
+    )
+    assert recovery_report["outcome"] == "passed"
+    assert recovery_report["cloud_mutations_executed"] == 0
     print("smoke tests: passed")
 
 

@@ -5,7 +5,8 @@ Azure Monitor, Azure Policy, Bicep, Terraform/OpenTofu, GitOps, FinOps and revie
 remediation**.
 
 [A2Z SOC](https://a2zsoc.com) · [Architecture](docs/architecture.md) ·
-[Controls](docs/control-catalog.md) · [Service catalog](docs/service-catalog.md)
+[Controls](docs/control-catalog.md) · [Recovery assurance](docs/recovery-assurance.md) ·
+[Service catalog](docs/service-catalog.md)
 
 ## Why this exists
 
@@ -25,6 +26,7 @@ This repository is the integration plane for that operating model. It currently 
 - a responsive customer-facing HTML operations report;
 - an opt-in, read-only Azure CLI acquisition adapter for five evidence sources;
 - evidence receipts containing scope, timestamps, query identity, adapter version and hashes;
+- recovery contracts, dependency ordering, RTO/RPO evaluation and drill economics;
 - synthetic fixtures and tests that do not misrepresent a live Azure deployment.
 
 ## Demonstrated workflow
@@ -81,6 +83,24 @@ It attempts Azure Resource Graph, Policy Insights, Advisor, Resource Health and 
 Unavailable permissions or services are recorded as `unknown`; they are never treated as passing
 controls. The command does not deploy, update or delete Azure resources. Authenticate separately
 with the Azure CLI and use only a tenant and subscription you are authorized to assess.
+
+## Recovery assurance proof
+
+Replay the synthetic recovery drill:
+
+```bash
+PYTHONPATH=src python -m azure_msp.recovery_cli \
+  examples/recovery-contract.json \
+  examples/recovery-drill-events.json \
+  --isolated-network \
+  --approval workload-owner \
+  --approval cloud-operations \
+  --output evidence/recovery-report.json
+```
+
+The fixture deliberately breaches RTO and RPO and fails its synthetic checkout transaction. It
+therefore demonstrates failure detection, not successful Azure recoverability. The engine rejects
+missing approvals, non-isolated drills, prohibited production failover and dependency cycles.
 
 The fixture intentionally contains an unmonitored VM, a stale patch assessment, incomplete
 ownership and a publicly reachable storage account. The engine emits findings and proposals but

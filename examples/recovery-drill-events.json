@@ -1,0 +1,44 @@
+{
+  "evidence_class": "synthetic",
+  "events": [
+    {
+      "component_id": "private-dns",
+      "started_minute": 0,
+      "completed_minute": 4,
+      "recovery_point_age_minutes": 0,
+      "validation_results": {"dns_resolution": true},
+      "temporary_cost_usd": 0.25
+    },
+    {
+      "component_id": "key-vault",
+      "started_minute": 4,
+      "completed_minute": 8,
+      "recovery_point_age_minutes": 0,
+      "validation_results": {
+        "managed_identity_access": true,
+        "certificate_validity": true
+      },
+      "temporary_cost_usd": 0.10
+    },
+    {
+      "component_id": "orders-db",
+      "started_minute": 8,
+      "completed_minute": 19,
+      "recovery_point_age_minutes": 9,
+      "validation_results": {"database_consistency": true},
+      "temporary_cost_usd": 3.80
+    },
+    {
+      "component_id": "checkout-api",
+      "started_minute": 19,
+      "completed_minute": 38,
+      "recovery_point_age_minutes": 0,
+      "validation_results": {
+        "application_health": true,
+        "synthetic_transaction": false,
+        "telemetry_delivery": true
+      },
+      "temporary_cost_usd": 2.25
+    }
+  ]
+}
