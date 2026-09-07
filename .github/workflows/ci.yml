@@ -20,3 +20,4 @@ jobs:
       - run: pytest -q
       - run: PYTHONPATH=src python tests/run_smoke.py
       - run: python -m azure_msp.cli examples/customer-inventory.json --output /tmp/report.json --html /tmp/report.html
+      - run: python -m azure_msp.live_cli --help

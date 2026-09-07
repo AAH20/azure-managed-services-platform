@@ -34,6 +34,16 @@ flowchart LR
 9. Operational evidence is retained only for the contracted period.
 10. Provider activity is auditable by the customer.
 
+## Evidence acquisition contract
+
+Every observation records its customer scope, source, query identifier, adapter version, collection
+time, record count and SHA-256 digest of the raw response. A failed request produces an `unknown`
+observation with an error class. It does not produce a successful control result.
+
+The current CLI adapter is intentionally read-only and covers Resource Graph, Policy Insights,
+Advisor, Resource Health and role assignments. Authentication remains an operator responsibility;
+the platform does not collect or persist Azure credentials.
+
 ## Production extensions
 
 - Workload identity federation for automation
@@ -56,4 +66,3 @@ flowchart LR
 - Compliance certification
 - Guaranteed cloud savings
 - A production SLA
-

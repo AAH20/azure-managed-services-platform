@@ -1,5 +1,9 @@
 """Dependency-free smoke tests for constrained build environments."""
 
+import json
+import subprocess
+
+from azure_msp.azure_evidence import collect_baseline
 from azure_msp.evaluator import evaluate, kpis, proposals
 from azure_msp.models import Customer, Resource
 from azure_msp.operations import TenantBoundaryError, build_work_queue, build_workloads, transition
@@ -57,6 +61,15 @@ def main() -> None:
         pass
     else:
         raise AssertionError("cross-tenant transition was not denied")
+
+    class FakeRunner:
+        def run(self, arguments):
+            return subprocess.CompletedProcess(arguments, 0, json.dumps([]), "")
+
+    observations = collect_baseline("tenant-test", "subscription-test", FakeRunner())
+    assert len(observations) == 5
+    assert all(item.status == "observed" for item in observations)
+    assert all(item.receipt.raw_sha256 for item in observations)
     print("smoke tests: passed")
 
 

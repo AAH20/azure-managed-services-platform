@@ -23,6 +23,8 @@ This repository is the integration plane for that operating model. It currently 
 - business-service grouping and financial-exposure prioritization;
 - tenant-bound approval state transitions with audit events;
 - a responsive customer-facing HTML operations report;
+- an opt-in, read-only Azure CLI acquisition adapter for five evidence sources;
+- evidence receipts containing scope, timestamps, query identity, adapter version and hashes;
 - synthetic fixtures and tests that do not misrepresent a live Azure deployment.
 
 ## Demonstrated workflow
@@ -62,6 +64,23 @@ PYTHONPATH=src python -m azure_msp.cli examples/customer-inventory.json \
 
 Open `evidence/customer-report.html` locally to inspect the customer operations view. The displayed
 revenue and exposure values are synthetic prioritization inputs, not validated customer losses.
+
+## Authorized live collection
+
+The collection command requires an explicit acknowledgement and performs read operations only:
+
+```bash
+azure-msp-collect \
+  --tenant-id 00000000-0000-0000-0000-000000000000 \
+  --subscription-id 00000000-0000-0000-0000-000000000000 \
+  --acknowledge-authorized-read \
+  --output evidence/live-baseline.json
+```
+
+It attempts Azure Resource Graph, Policy Insights, Advisor, Resource Health and RBAC observations.
+Unavailable permissions or services are recorded as `unknown`; they are never treated as passing
+controls. The command does not deploy, update or delete Azure resources. Authenticate separately
+with the Azure CLI and use only a tenant and subscription you are authorized to assess.
 
 The fixture intentionally contains an unmonitored VM, a stale patch assessment, incomplete
 ownership and a publicly reachable storage account. The engine emits findings and proposals but
