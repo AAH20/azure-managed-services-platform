@@ -8,6 +8,7 @@ remediation**.
 [Controls](docs/control-catalog.md) · [Recovery assurance](docs/recovery-assurance.md) ·
 [Change assurance](docs/change-assurance.md) ·
 [Incident revenue protection](docs/incident-revenue-protection.md) ·
+[FinOps value realization](docs/finops-value-realization.md) ·
 [Service catalog](docs/service-catalog.md)
 
 ## Why this exists
@@ -31,6 +32,8 @@ This repository is the integration plane for that operating model. It currently 
 - recovery contracts, dependency ordering, RTO/RPO evaluation and drill economics;
 - progressive infrastructure-change gates using workload health and financial intent;
 - incident signal correlation, recovery authority and transaction-based restoration proof;
+- workload cost allocation, unit economics and approval-gated optimization decisions;
+- an intentionally empty verified-savings ledger until post-change billing proves value;
 - synthetic fixtures and tests that do not misrepresent a live Azure deployment.
 
 ## Demonstrated workflow
@@ -146,6 +149,24 @@ authorizes but does not execute the rollback, and reports zero cloud mutations.
 The fixture intentionally contains an unmonitored VM, a stale patch assessment, incomplete
 ownership and a publicly reachable storage account. The engine emits findings and proposals but
 executes **zero** cloud changes.
+
+## FinOps value-realization proof
+
+Replay synthetic Azure cost and workload-demand evidence:
+
+```bash
+PYTHONPATH=src python -m azure_msp.finops_cli \
+  examples/finops-evidence.json \
+  --approval workload-owner \
+  --approval financial-owner \
+  --approval cloud-operations \
+  --output evidence/finops-report.json
+```
+
+The replay allocates shared monitoring and gateway costs, calculates cost per successful
+transaction and evaluates three optimization options. Unsafe database downsizing is rejected.
+Eligible options still require Change Assurance, and the verified-savings ledger remains empty
+until normalized post-change billing evidence exists. No Azure changes are executed.
 
 ## Azure deployment building blocks
 

@@ -20,6 +20,7 @@ azure-msp-collect = "azure_msp.live_cli:main"
 azure-msp-recovery = "azure_msp.recovery_cli:main"
 azure-msp-change = "azure_msp.change_cli:main"
 azure-msp-incident = "azure_msp.incident_cli:main"
+azure-msp-finops = "azure_msp.finops_cli:main"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

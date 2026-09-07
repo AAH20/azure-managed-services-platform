@@ -35,6 +35,19 @@ These are positioning ranges, not quotes. Final pricing must account for resourc
 coverage hours, SLA, data location, required licenses, integrations and professional liability.
 Azure consumption and third-party licenses remain customer-paid unless the contract says otherwise.
 
+## FinOps value realization
+
+- FOCUS-aligned cost ingestion and allocation design
+- Cost per transaction, tenant, customer, workload or inference
+- Shared platform and Kubernetes cost allocation
+- Reliability-aware optimization decisions routed through Change Assurance
+- Commitment decision support and post-billing savings verification
+- Executive value ledger with explicit normalization and exclusions
+
+Indicative ranges: USD 3,000–10,000 for assessment, USD 10,000–30,000 for onboarding and USD
+2,000–10,000 monthly. An optional 10–20 percent share applies only to agreed, normalized and
+verified net savings, never to recommendation estimates.
+
 ## Recovery assurance
 
 - Workload dependency and recovery contract

@@ -1,0 +1,21 @@
+{
+  "evaluation_id": "finops-2026-08-checkout",
+  "customer_id": "contoso-retail",
+  "cost_records": [
+    {"period": "2026-08", "resource_id": "/aks/checkout", "service": "AKS", "cost_usd": 2400, "allocation": "checkout"},
+    {"period": "2026-08", "resource_id": "/postgres/checkout", "service": "PostgreSQL", "cost_usd": 1800, "allocation": "checkout"},
+    {"period": "2026-08", "resource_id": "/monitor/shared", "service": "Azure Monitor", "cost_usd": 900, "allocation": "shared", "usage_driver": "telemetry_gb"},
+    {"period": "2026-08", "resource_id": "/gateway/shared", "service": "Application Gateway", "cost_usd": 600, "allocation": "shared", "usage_driver": "requests"},
+    {"period": "2026-08", "resource_id": "/unmapped/network", "service": "Bandwidth", "cost_usd": 300, "allocation": "unmapped"}
+  ],
+  "workload_demand": [
+    {"period": "2026-08", "workload_id": "checkout", "successful_transactions": 100000, "allocation_drivers": {"telemetry_gb": 70, "requests": 80}},
+    {"period": "2026-08", "workload_id": "catalog", "successful_transactions": 400000, "allocation_drivers": {"telemetry_gb": 30, "requests": 20}}
+  ],
+  "decision_contract": {"required_approvers": ["workload-owner", "financial-owner", "cloud-operations"]},
+  "optimization_options": [
+    {"option_id": "schedule-nonprod", "title": "Schedule non-production capacity", "expected_monthly_saving_usd": 620, "implementation_cost_usd": 900, "reliability_verified": true, "recovery_verified": true, "reversible": true, "commitment_months": 0},
+    {"option_id": "downsize-postgres", "title": "Downsize checkout PostgreSQL", "expected_monthly_saving_usd": 1200, "implementation_cost_usd": 1400, "reliability_verified": false, "recovery_verified": true, "reversible": true, "commitment_months": 0},
+    {"option_id": "savings-plan", "title": "Purchase a three-year compute commitment", "expected_monthly_saving_usd": 850, "implementation_cost_usd": 500, "reliability_verified": true, "recovery_verified": true, "reversible": false, "commitment_months": 36}
+  ]
+}
