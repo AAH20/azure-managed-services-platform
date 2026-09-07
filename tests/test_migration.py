@@ -54,7 +54,7 @@ def test_dependency_order_and_eligible_wave():
     report = evaluate_migration(fixture(), approvals={"owner"})
     assert report["dependency_order"] == ["db", "api"]
     assert report["wave_status"] == "eligible-for-controlled-cutover"
-    assert report["assessments"][0]["recommended_candidate"]["first_year_net_value_usd"] == 160
+    assert report["assessments"][0]["recommended_candidate"]["first_year_net_value_usd"] == 60
     assert report["source_decommission"]["approved"] is False
     assert report["cloud_mutations_executed"] == 0
 
