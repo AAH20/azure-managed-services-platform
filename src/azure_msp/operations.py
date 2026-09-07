@@ -132,7 +132,7 @@ def transition(
     if target is None:
         raise InvalidTransitionError(f"action {action!r} is not allowed from {previous!r}")
     event_seed = f"{item.work_item_id}:{previous}:{target}:{actor}:{reason}"
-    event_id = "audit-" + sha256(event_seed.encode("utf-8")).hexdigest()[:16]
+    event_id = "audit-" + sha256(event_seed.encode()).hexdigest()[:16]
     item.status = target
     return AuditEvent.create(
         event_id=event_id,

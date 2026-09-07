@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from collections import Counter
+from collections.abc import Iterable
 from hashlib import sha256
-from typing import Iterable
 
 from .models import ChangeProposal, Finding, Resource
 
@@ -94,7 +94,7 @@ def proposals(findings: Iterable[Finding]) -> list[ChangeProposal]:
     result: list[ChangeProposal] = []
     for finding in findings:
         digest = sha256(
-            f"{finding.control_id}:{finding.resource_id}".encode("utf-8")
+            f"{finding.control_id}:{finding.resource_id}".encode()
         ).hexdigest()[:12]
         result.append(
             ChangeProposal(
@@ -136,4 +136,3 @@ def kpis(resources: list[Resource], findings: list[Finding]) -> dict[str, object
         "open_change_proposals": len(findings),
         "automatic_changes_executed": 0,
     }
-

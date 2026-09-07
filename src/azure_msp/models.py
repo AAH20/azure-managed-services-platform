@@ -15,7 +15,7 @@ class Resource:
     properties: dict[str, Any] = field(default_factory=dict)
 
     @classmethod
-    def from_dict(cls, value: dict[str, Any]) -> "Resource":
+    def from_dict(cls, value: dict[str, Any]) -> Resource:
         return cls(
             id=value["id"],
             name=value["name"],
@@ -115,7 +115,7 @@ class AuditEvent:
         previous_status: str,
         new_status: str,
         reason: str,
-    ) -> "AuditEvent":
+    ) -> AuditEvent:
         return cls(
             event_id=event_id,
             customer_id=customer_id,
