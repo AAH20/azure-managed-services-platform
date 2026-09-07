@@ -48,6 +48,19 @@ Indicative ranges: USD 3,000–10,000 for assessment, USD 10,000–30,000 for on
 2,000–10,000 monthly. An optional 10–20 percent share applies only to agreed, normalized and
 verified net savings, never to recommendation estimates.
 
+## Cloud migration and application modernization
+
+- Azure Migrate and CMDB evidence integration
+- Dependency graph, 6R disposition and migration-wave planning
+- Landing-zone, networking, identity and recovery readiness
+- Terraform/OpenTofu and Bicep delivery behind approval gates
+- Test migration, business-transaction validation and controlled cutover
+- Post-cutover FinOps verification and protected source decommissioning
+
+Indicative ranges: USD 7,500–25,000 for discovery and business case, USD 15,000–60,000 for the
+migration foundation, USD 10,000–50,000 per wave and USD 20,000–150,000+ for application
+modernization. Actual pricing depends on scope, workload complexity, downtime and licensing.
+
 ## Recovery assurance
 
 - Workload dependency and recovery contract

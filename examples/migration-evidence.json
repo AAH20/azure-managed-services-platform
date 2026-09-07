@@ -1,0 +1,49 @@
+{
+  "migration_id": "vmware-checkout-wave-01",
+  "customer_id": "contoso-retail",
+  "cutover_contract": {
+    "maximum_downtime_minutes": 30,
+    "maximum_rpo_minutes": 15,
+    "required_approvers": ["application-owner", "cloud-operations", "business-owner"]
+  },
+  "assets": [
+    {
+      "asset_id": "sql-orders",
+      "name": "Orders SQL Server",
+      "source_platform": "VMware",
+      "annual_source_cost_usd": 42000,
+      "dependencies": [],
+      "candidates": [
+        {"strategy": "rehost", "target": "SQL Server on Azure VM", "ready": true, "annual_target_cost_usd": 36000, "implementation_cost_usd": 9000, "annual_operational_saving_usd": 3000, "annual_revenue_enablement_usd": 0, "expected_downtime_loss_usd": 4000, "risk_reserve_usd": 5000},
+        {"strategy": "replatform", "target": "Azure SQL Managed Instance", "ready": true, "annual_target_cost_usd": 30000, "implementation_cost_usd": 18000, "annual_operational_saving_usd": 10000, "annual_revenue_enablement_usd": 6000, "expected_downtime_loss_usd": 6000, "risk_reserve_usd": 6000}
+      ]
+    },
+    {
+      "asset_id": "checkout-api",
+      "name": "Checkout API",
+      "source_platform": "VMware",
+      "annual_source_cost_usd": 30000,
+      "dependencies": ["sql-orders"],
+      "candidates": [
+        {"strategy": "rehost", "target": "Azure Virtual Machines", "ready": true, "annual_target_cost_usd": 24000, "implementation_cost_usd": 7000, "annual_operational_saving_usd": 2000, "annual_revenue_enablement_usd": 0, "expected_downtime_loss_usd": 5000, "risk_reserve_usd": 4000},
+        {"strategy": "replatform", "target": "Azure App Service", "ready": true, "annual_target_cost_usd": 18000, "implementation_cost_usd": 14000, "annual_operational_saving_usd": 8000, "annual_revenue_enablement_usd": 12000, "expected_downtime_loss_usd": 3000, "risk_reserve_usd": 5000}
+      ]
+    },
+    {
+      "asset_id": "checkout-web",
+      "name": "Checkout Web",
+      "source_platform": "VMware",
+      "annual_source_cost_usd": 18000,
+      "dependencies": ["checkout-api"],
+      "candidates": [
+        {"strategy": "replatform", "target": "Azure App Service", "ready": true, "annual_target_cost_usd": 12000, "implementation_cost_usd": 8000, "annual_operational_saving_usd": 5000, "annual_revenue_enablement_usd": 10000, "expected_downtime_loss_usd": 2500, "risk_reserve_usd": 2500},
+        {"strategy": "refactor", "target": "Azure Kubernetes Service", "ready": false, "annual_target_cost_usd": 15000, "implementation_cost_usd": 30000, "annual_operational_saving_usd": 7000, "annual_revenue_enablement_usd": 18000, "expected_downtime_loss_usd": 4000, "risk_reserve_usd": 10000}
+      ]
+    }
+  ],
+  "cutover_evidence": [
+    {"asset_id": "sql-orders", "test_migration_passed": true, "network_verified": true, "identity_verified": true, "dns_verified": true, "backup_verified": true, "rollback_verified": true, "transaction_verified": true, "observed_downtime_minutes": 12, "observed_rpo_minutes": 4},
+    {"asset_id": "checkout-api", "test_migration_passed": true, "network_verified": true, "identity_verified": true, "dns_verified": false, "backup_verified": true, "rollback_verified": true, "transaction_verified": false, "observed_downtime_minutes": 18, "observed_rpo_minutes": 5},
+    {"asset_id": "checkout-web", "test_migration_passed": true, "network_verified": true, "identity_verified": true, "dns_verified": true, "backup_verified": true, "rollback_verified": true, "transaction_verified": true, "observed_downtime_minutes": 9, "observed_rpo_minutes": 2}
+  ]
+}

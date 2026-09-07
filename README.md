@@ -9,6 +9,7 @@ remediation**.
 [Change assurance](docs/change-assurance.md) ·
 [Incident revenue protection](docs/incident-revenue-protection.md) ·
 [FinOps value realization](docs/finops-value-realization.md) ·
+[Migration and modernization](docs/migration-modernization-factory.md) ·
 [Service catalog](docs/service-catalog.md)
 
 ## Why this exists
@@ -34,6 +35,7 @@ This repository is the integration plane for that operating model. It currently 
 - incident signal correlation, recovery authority and transaction-based restoration proof;
 - workload cost allocation, unit economics and approval-gated optimization decisions;
 - an intentionally empty verified-savings ledger until post-change billing proves value;
+- dependency-aware 6R migration assessment, cutover gates and protected decommissioning;
 - synthetic fixtures and tests that do not misrepresent a live Azure deployment.
 
 ## Demonstrated workflow
@@ -167,6 +169,24 @@ The replay allocates shared monitoring and gateway costs, calculates cost per su
 transaction and evaluates three optimization options. Unsafe database downsizing is rejected.
 Eligible options still require Change Assurance, and the verified-savings ledger remains empty
 until normalized post-change billing evidence exists. No Azure changes are executed.
+
+## Migration and modernization proof
+
+Replay a synthetic VMware-to-Azure migration wave:
+
+```bash
+PYTHONPATH=src python -m azure_msp.migration_cli \
+  examples/migration-evidence.json \
+  --approval application-owner \
+  --approval cloud-operations \
+  --approval business-owner \
+  --output evidence/migration-report.json
+```
+
+The dependency order places SQL before the checkout API and web tier. The API fails DNS and
+business-transaction validation, so the complete wave is blocked. The report compares 6R target
+candidates but treats its recommendation as decision support. Source decommissioning always
+requires a separate approval, and the replay executes zero cloud mutations.
 
 ## Azure deployment building blocks
 

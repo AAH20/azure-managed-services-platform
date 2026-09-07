@@ -45,3 +45,17 @@ jobs:
           --approval workload-owner
           --approval cloud-operations
           --output /tmp/incident-report.json
+      - run: >-
+          python -m azure_msp.finops_cli
+          examples/finops-evidence.json
+          --approval workload-owner
+          --approval financial-owner
+          --approval cloud-operations
+          --output /tmp/finops-report.json
+      - run: >-
+          python -m azure_msp.migration_cli
+          examples/migration-evidence.json
+          --approval application-owner
+          --approval cloud-operations
+          --approval business-owner
+          --output /tmp/migration-report.json
