@@ -1,0 +1,31 @@
+{
+  "source": "synthetic-azure-resource-graph-fixture",
+  "evidence_class": "synthetic",
+  "resources": [
+    {
+      "id": "/subscriptions/demo/resourceGroups/prod/providers/Microsoft.Compute/virtualMachines/api-01",
+      "name": "api-01",
+      "type": "Microsoft.Compute/virtualMachines",
+      "location": "westeurope",
+      "tags": {"environment": "production", "costCenter": "commerce"},
+      "properties": {
+        "monitoringEnabled": false,
+        "backupEnabled": true,
+        "daysSincePatchAssessment": 18
+      }
+    },
+    {
+      "id": "/subscriptions/demo/resourceGroups/prod/providers/Microsoft.Storage/storageAccounts/ordersprod",
+      "name": "ordersprod",
+      "type": "Microsoft.Storage/storageAccounts",
+      "location": "westeurope",
+      "tags": {
+        "owner": "platform@example.invalid",
+        "environment": "production",
+        "costCenter": "commerce"
+      },
+      "properties": {"publicNetworkAccess": "Enabled"}
+    }
+  ]
+}
+
