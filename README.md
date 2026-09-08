@@ -14,6 +14,7 @@ remediation**.
 [Network digital twin](docs/network-digital-twin.md) ·
 [Data reliability](docs/data-reliability.md) ·
 [Capacity engineering](docs/capacity-performance.md) ·
+[Commercial control plane](docs/commercial-control-plane.md) ·
 [Service catalog](docs/service-catalog.md)
 
 ## Why this exists
@@ -44,6 +45,7 @@ This repository is the integration plane for that operating model. It currently 
 - hybrid and multi-cloud connectivity intents with current/proposed path comparison;
 - semantic data contracts, lineage blast radius and evidence-gated publication;
 - forecast-driven cross-stack capacity portfolios with quota and load-test gates;
+- contract-driven tenant lifecycle, isolation, entitlement and Marketplace revenue gates;
 - synthetic fixtures and tests that do not misrepresent a live Azure deployment.
 
 ## Demonstrated workflow
@@ -263,6 +265,24 @@ PYTHONPATH=src python -m azure_msp.capacity_cli \
 The AKS-only plan is rejected because database, NAT, NIM, DR and quota constraints remain. A
 full-dependency pre-scale portfolio is eligible only for an isolated load test. Production scaling
 is not authorized and no cloud mutation is executed.
+
+## SaaS commercial control-plane proof
+
+Evaluate a synthetic regulated-customer onboarding and invoice:
+
+```bash
+PYTHONPATH=src python -m azure_msp.commercial_cli \
+  examples/commercial-onboarding-evidence.json \
+  --approval commercial-owner \
+  --approval cloud-operations \
+  --approval financial-owner \
+  --output evidence/commercial-report.json
+```
+
+The shared and wrong-region offers are rejected. The dedicated West Europe stamp clears the
+isolation, entitlement and margin contracts; duplicate usage is excluded and the invoice
+reconciles. The result is a plan only: no tenant activation, provisioning, billing submission or
+cloud mutation is executed.
 
 ## Azure deployment building blocks
 

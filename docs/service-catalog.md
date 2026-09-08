@@ -108,6 +108,20 @@ Indicative ranges: USD 7,500–25,000 for assessment, USD 20,000–75,000 for pr
 USD 25,000–150,000 for AI/GPU capacity engineering and USD 5,000–25,000 monthly for managed
 capacity SRE.
 
+## SaaS commercial control plane and Marketplace operations
+
+- Tenant lifecycle and entitlement contracts
+- Shared, dedicated-stamp and customer-owned subscription planning
+- Region, isolation, approval and gross-margin gates
+- Idempotent Marketplace and direct-channel usage metering
+- Meter-to-invoice reconciliation and orphaned-resource controls
+- Activation, upgrade and decommission evidence
+
+Indicative ranges: USD 5,000–15,000 for commercial readiness, USD 30,000–150,000 for a SaaS
+control plane, USD 15,000–60,000 for Marketplace integration and USD 5,000–25,000 monthly for
+managed commercial operations. Consumption, Marketplace fees and third-party licenses are
+excluded.
+
 ## Recovery assurance
 
 - Workload dependency and recovery contract

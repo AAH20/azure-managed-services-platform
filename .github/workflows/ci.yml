@@ -87,3 +87,10 @@ jobs:
           --approval capacity-engineering
           --approval financial-owner
           --output /tmp/capacity-report.json
+      - run: >-
+          python -m azure_msp.commercial_cli
+          examples/commercial-onboarding-evidence.json
+          --approval commercial-owner
+          --approval cloud-operations
+          --approval financial-owner
+          --output /tmp/commercial-report.json

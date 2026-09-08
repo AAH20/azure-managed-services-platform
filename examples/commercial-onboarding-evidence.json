@@ -1,0 +1,16 @@
+{
+  "onboarding_id": "marketplace-contoso-eu-001",
+  "customer_contract": {"customer_id": "contoso-eu", "subscription_id": "marketplace-sub-001", "current_state": "awaiting-activation", "requested_state": "activation-validated", "required_region": "westeurope", "regulated": true, "required_isolation": "dedicated-stamp", "monthly_minimum_usd": 12000, "forecast_overage_usd": 2500, "minimum_gross_margin_pct": 40, "required_entitlements": ["managed-azure", "network-assurance", "recovery-assurance", "managed-llmops"]},
+  "control_contract": {"required_approvers": ["commercial-owner", "cloud-operations", "financial-owner"], "meter_variance_usd": 0.01},
+  "deployment_offers": [
+    {"offer_id": "shared-eu", "isolation": "shared-stamp", "region": "westeurope", "entitlements": ["managed-azure", "network-assurance", "recovery-assurance", "managed-llmops"], "infrastructure_cost_usd": 1600, "model_cost_usd": 1400, "monitoring_cost_usd": 500, "license_cost_usd": 400, "support_cost_usd": 1200, "expected_service_credit_usd": 150, "marketplace_fee_usd": 435},
+    {"offer_id": "dedicated-eu", "isolation": "dedicated-stamp", "region": "westeurope", "entitlements": ["managed-azure", "network-assurance", "recovery-assurance", "managed-llmops"], "infrastructure_cost_usd": 3200, "model_cost_usd": 1400, "monitoring_cost_usd": 600, "license_cost_usd": 500, "support_cost_usd": 1500, "expected_service_credit_usd": 200, "marketplace_fee_usd": 435},
+    {"offer_id": "dedicated-us-low-margin", "isolation": "dedicated-stamp", "region": "eastus", "entitlements": ["managed-azure", "network-assurance"], "infrastructure_cost_usd": 7000, "model_cost_usd": 3000, "monitoring_cost_usd": 900, "license_cost_usd": 800, "support_cost_usd": 2500, "expected_service_credit_usd": 500, "marketplace_fee_usd": 435}
+  ],
+  "usage_events": [
+    {"event_id": "evt-1", "idempotency_key": "workflow-1", "subscription_id": "marketplace-sub-001", "meter": "completed-ai-workflow", "quantity": 1000, "unit_price_usd": 0.05, "billing_period": "2026-09"},
+    {"event_id": "evt-2", "idempotency_key": "workflow-2", "subscription_id": "marketplace-sub-001", "meter": "completed-ai-workflow", "quantity": 500, "unit_price_usd": 0.05, "billing_period": "2026-09"},
+    {"event_id": "evt-duplicate", "idempotency_key": "workflow-2", "subscription_id": "marketplace-sub-001", "meter": "completed-ai-workflow", "quantity": 500, "unit_price_usd": 0.05, "billing_period": "2026-09"}
+  ],
+  "invoice_evidence": {"billing_period": "2026-09", "metered_amount_usd": 75}
+}
