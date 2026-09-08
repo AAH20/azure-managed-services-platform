@@ -27,6 +27,7 @@ azure-msp-network = "azure_msp.network_cli:main"
 azure-msp-data = "azure_msp.data_cli:main"
 azure-msp-capacity = "azure_msp.capacity_cli:main"
 azure-msp-commercial = "azure_msp.commercial_cli:main"
+azure-msp-ai-value = "azure_msp.ai_value_cli:main"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

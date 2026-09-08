@@ -15,6 +15,7 @@ remediation**.
 [Data reliability](docs/data-reliability.md) ·
 [Capacity engineering](docs/capacity-performance.md) ·
 [Commercial control plane](docs/commercial-control-plane.md) ·
+[AI unit economics](docs/ai-unit-economics-gateway.md) ·
 [Service catalog](docs/service-catalog.md)
 
 ## Why this exists
@@ -46,6 +47,7 @@ This repository is the integration plane for that operating model. It currently 
 - semantic data contracts, lineage blast radius and evidence-gated publication;
 - forecast-driven cross-stack capacity portfolios with quota and load-test gates;
 - contract-driven tenant lifecycle, isolation, entitlement and Marketplace revenue gates;
+- trace-to-outcome AI cost allocation, retry-waste detection and review-gated model routing;
 - synthetic fixtures and tests that do not misrepresent a live Azure deployment.
 
 ## Demonstrated workflow
@@ -283,6 +285,24 @@ The shared and wrong-region offers are rejected. The dedicated West Europe stamp
 isolation, entitlement and margin contracts; duplicate usage is excluded and the invoice
 reconciles. The result is a plan only: no tenant activation, provisioning, billing submission or
 cloud mutation is executed.
+
+## AI unit economics proof
+
+Evaluate synthetic Azure OpenAI and NVIDIA NIM outcome traces:
+
+```bash
+PYTHONPATH=src python -m azure_msp.ai_value_cli \
+  examples/ai-value-evidence.json \
+  --approval product-owner \
+  --approval ai-operations \
+  --approval financial-owner \
+  --output evidence/ai-value-report.json
+```
+
+The report allocates model, GPU, tool and shared-platform cost to tenants and workflows, exposes
+the cost of a rejected retry, and evaluates routing candidates against quality, latency, region
+and approval contracts. The eligible NVIDIA NIM option is authorized only for a shadow test;
+production routing remains unchanged and the verified-savings ledger remains empty.
 
 ## Azure deployment building blocks
 

@@ -122,6 +122,19 @@ control plane, USD 15,000–60,000 for Marketplace integration and USD 5,000–2
 managed commercial operations. Consumption, Marketplace fees and third-party licenses are
 excluded.
 
+## AI unit economics and ValueOps
+
+- OpenTelemetry AI, model, tool, GPU and business-outcome normalization
+- Direct and shared infrastructure cost allocation
+- Cost per accepted outcome and tenant gross-margin reporting
+- Retry and rejected-workflow waste detection
+- Quality, latency, region and approval-gated routing proposals
+- Post-change reconciliation before savings can be recorded
+
+Indicative ranges: USD 7,500–20,000 for discovery, USD 20,000–60,000 for instrumentation,
+USD 75,000–250,000 for production implementation and USD 8,000–35,000 monthly for managed AI
+ValueOps. Consumption, licenses and third-party assurance are excluded.
+
 ## Recovery assurance
 
 - Workload dependency and recovery contract

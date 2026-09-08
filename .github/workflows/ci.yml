@@ -94,3 +94,10 @@ jobs:
           --approval cloud-operations
           --approval financial-owner
           --output /tmp/commercial-report.json
+      - run: >-
+          python -m azure_msp.ai_value_cli
+          examples/ai-value-evidence.json
+          --approval product-owner
+          --approval ai-operations
+          --approval financial-owner
+          --output /tmp/ai-value-report.json

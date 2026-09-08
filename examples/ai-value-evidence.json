@@ -1,0 +1,24 @@
+{
+  "evaluation_id": "ai-value-september-2026",
+  "period": "2026-09",
+  "shared_platform_cost_usd": 9.0,
+  "rate_cards": [
+    {"provider": "azure-openai", "model": "frontier-large", "input_per_million_usd": 10, "output_per_million_usd": 30, "gpu_hour_usd": 0, "tool_call_usd": 0.01},
+    {"provider": "nvidia-nim", "model": "open-weight-70b", "input_per_million_usd": 0, "output_per_million_usd": 0, "gpu_hour_usd": 4, "tool_call_usd": 0.005}
+  ],
+  "outcome_events": [
+    {"event_id": "evt-001", "trace_id": "trace-001", "tenant_id": "contoso", "workflow_id": "incident-triage", "provider": "azure-openai", "model": "frontier-large", "input_tokens": 100000, "output_tokens": 20000, "gpu_seconds": 0, "tool_calls": 5, "attempt": 1, "accepted": true, "evaluation_passed": true, "latency_ms": 1800, "business_value_usd": 150, "revenue_usd": 20},
+    {"event_id": "evt-002", "trace_id": "trace-002", "tenant_id": "contoso", "workflow_id": "incident-triage", "provider": "azure-openai", "model": "frontier-large", "input_tokens": 100000, "output_tokens": 20000, "gpu_seconds": 0, "tool_calls": 5, "attempt": 2, "accepted": false, "evaluation_passed": false, "latency_ms": 3100, "business_value_usd": 0, "revenue_usd": 0},
+    {"event_id": "evt-003", "trace_id": "trace-003", "tenant_id": "fabrikam", "workflow_id": "contract-review", "provider": "nvidia-nim", "model": "open-weight-70b", "input_tokens": 50000, "output_tokens": 10000, "gpu_seconds": 900, "tool_calls": 3, "attempt": 1, "accepted": true, "evaluation_passed": true, "latency_ms": 2200, "business_value_usd": 90, "revenue_usd": 16}
+  ],
+  "routing_contract": {
+    "allowed_regions": ["westeurope"],
+    "minimum_pass_rate_pct": 95,
+    "maximum_p95_latency_ms": 2500,
+    "required_approvers": ["product-owner", "ai-operations", "financial-owner"]
+  },
+  "routing_candidates": [
+    {"candidate_id": "nim-west-europe-shadow", "provider": "nvidia-nim", "model": "open-weight-70b", "region": "westeurope", "projected_cost_per_accepted_outcome_usd": 2.1, "projected_evaluation_pass_rate_pct": 97, "projected_p95_latency_ms": 2100, "reversible": true},
+    {"candidate_id": "cheap-unverified-region", "provider": "vllm", "model": "small-open-weight", "region": "eastus", "projected_cost_per_accepted_outcome_usd": 0.7, "projected_evaluation_pass_rate_pct": 88, "projected_p95_latency_ms": 2800, "reversible": true}
+  ]
+}
