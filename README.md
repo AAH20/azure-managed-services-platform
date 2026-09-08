@@ -12,6 +12,7 @@ remediation**.
 [Migration and modernization](docs/migration-modernization-factory.md) ·
 [AI production engineering](docs/ai-production-engineering.md) ·
 [Network digital twin](docs/network-digital-twin.md) ·
+[Data reliability](docs/data-reliability.md) ·
 [Service catalog](docs/service-catalog.md)
 
 ## Why this exists
@@ -40,6 +41,7 @@ This repository is the integration plane for that operating model. It currently 
 - dependency-aware 6R migration assessment, cutover gates and protected decommissioning;
 - multi-provider AI release economics, loop detection and evidence-gated model selection;
 - hybrid and multi-cloud connectivity intents with current/proposed path comparison;
+- semantic data contracts, lineage blast radius and evidence-gated publication;
 - synthetic fixtures and tests that do not misrepresent a live Azure deployment.
 
 ## Demonstrated workflow
@@ -225,6 +227,23 @@ PYTHONPATH=src python -m azure_msp.network_cli \
 The proposed state sends checkout traffic to a wrong next hop, resolves a private SQL endpoint
 publicly and loses the DR return route. The change is blocked, the responsible controls remain in
 the evidence report and production deployment is not authorized. No cloud mutation is executed.
+
+## Data reliability proof
+
+Evaluate a synthetic Salesforce-to-Fabric data release:
+
+```bash
+PYTHONPATH=src python -m azure_msp.data_cli \
+  examples/data-release-evidence.json \
+  --approval data-owner \
+  --approval revenue-operations \
+  --approval data-platform \
+  --output evidence/data-report.json
+```
+
+The pipeline technically succeeds, but a dollars-to-cents semantic change violates type, unit,
+range and reconciliation contracts. Publication and automated decisions are blocked; downstream
+Power BI, forecasting, inventory and agent consumers are listed. No data mutation is executed.
 
 ## Azure deployment building blocks
 

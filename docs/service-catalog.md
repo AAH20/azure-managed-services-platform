@@ -85,6 +85,17 @@ Indicative ranges: USD 7,500–25,000 for discovery, USD 15,000–50,000 for int
 USD 30,000–150,000 for a hybrid/multi-cloud network twin and USD 5,000–25,000 monthly for managed
 network reliability.
 
+## Data reliability and decision intelligence
+
+- Semantic data contracts and source reconciliation
+- Fabric, Databricks, dbt and OpenLineage integration
+- Dashboard, model, RAG and agent impact analysis
+- Quarantine, last-verified-version and controlled backfill workflow
+- Predictive/prescriptive decision evidence tied to business value
+
+Indicative ranges: USD 7,500–25,000 for assessment, USD 20,000–75,000 for contracts and lineage,
+USD 30,000–150,000 for data-platform reliability and USD 5,000–25,000 monthly for managed DataOps.
+
 ## Recovery assurance
 
 - Workload dependency and recovery contract

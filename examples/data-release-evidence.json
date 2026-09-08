@@ -1,0 +1,34 @@
+{
+  "release_id": "qualified-revenue-2026-09-08",
+  "customer_id": "contoso-retail",
+  "release_contract": {"required_approvers": ["data-owner", "revenue-operations", "data-platform"]},
+  "data_contracts": [
+    {
+      "product_id": "qualified-revenue", "owner": "revenue-operations",
+      "maximum_age_minutes": 30, "minimum_completeness_pct": 99.9,
+      "maximum_reconciliation_variance_pct": 0.5,
+      "contribution_margin_per_hour_usd": 22000,
+      "fields": [
+        {"name": "opportunity_id", "data_type": "string", "unit": "identifier", "nullable": false, "minimum": 0, "maximum": 1},
+        {"name": "annual_contract_value", "data_type": "decimal", "unit": "USD", "nullable": false, "minimum": 0, "maximum": 10000000}
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "product_id": "qualified-revenue", "pipeline_status": "succeeded", "age_minutes": 8,
+      "completeness_pct": 100, "reconciliation_variance_pct": 9900,
+      "fields": [
+        {"name": "opportunity_id", "data_type": "string", "unit": "identifier", "null_count": 0, "observed_minimum": 0, "observed_maximum": 1},
+        {"name": "annual_contract_value", "data_type": "integer", "unit": "USD-cents", "null_count": 0, "observed_minimum": 100000, "observed_maximum": 800000000}
+      ]
+    }
+  ],
+  "lineage_edges": [
+    {"source": "salesforce.opportunity", "target": "qualified-revenue"},
+    {"source": "qualified-revenue", "target": "powerbi.executive-pipeline"},
+    {"source": "qualified-revenue", "target": "ml.demand-forecast"},
+    {"source": "qualified-revenue", "target": "agent.expansion-prioritization"},
+    {"source": "ml.demand-forecast", "target": "inventory.replenishment-recommendation"}
+  ]
+}

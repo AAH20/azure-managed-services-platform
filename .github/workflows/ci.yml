@@ -73,3 +73,10 @@ jobs:
           --approval application-owner
           --approval cloud-operations
           --output /tmp/network-report.json
+      - run: >-
+          python -m azure_msp.data_cli
+          examples/data-release-evidence.json
+          --approval data-owner
+          --approval revenue-operations
+          --approval data-platform
+          --output /tmp/data-report.json
