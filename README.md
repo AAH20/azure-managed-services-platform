@@ -10,6 +10,7 @@ remediation**.
 [Incident revenue protection](docs/incident-revenue-protection.md) ·
 [FinOps value realization](docs/finops-value-realization.md) ·
 [Migration and modernization](docs/migration-modernization-factory.md) ·
+[AI production engineering](docs/ai-production-engineering.md) ·
 [Service catalog](docs/service-catalog.md)
 
 ## Why this exists
@@ -36,6 +37,7 @@ This repository is the integration plane for that operating model. It currently 
 - workload cost allocation, unit economics and approval-gated optimization decisions;
 - an intentionally empty verified-savings ledger until post-change billing proves value;
 - dependency-aware 6R migration assessment, cutover gates and protected decommissioning;
+- multi-provider AI release economics, loop detection and evidence-gated model selection;
 - synthetic fixtures and tests that do not misrepresent a live Azure deployment.
 
 ## Demonstrated workflow
@@ -187,6 +189,23 @@ The dependency order places SQL before the checkout API and web tier. The API fa
 business-transaction validation, so the complete wave is blocked. The report compares 6R target
 candidates but treats its recommendation as decision support. Source decommissioning always
 requires a separate approval, and the replay executes zero cloud mutations.
+
+## AI production engineering proof
+
+Compare synthetic Microsoft Foundry, NVIDIA NIM, self-hosted and frontier-model candidates:
+
+```bash
+PYTHONPATH=src python -m azure_msp.ai_production_cli \
+  examples/ai-release-evidence.json \
+  --approval product-owner \
+  --approval ai-operations \
+  --approval financial-owner \
+  --output evidence/ai-release-report.json
+```
+
+The inexpensive self-hosted candidate is rejected because completion, quality, groundedness, tool
+correctness, loops and net contribution regress. The highest-value eligible candidate advances
+only to shadow evaluation. Production promotion remains unauthorized and zero cloud changes run.
 
 ## Azure deployment building blocks
 

@@ -59,3 +59,10 @@ jobs:
           --approval cloud-operations
           --approval business-owner
           --output /tmp/migration-report.json
+      - run: >-
+          python -m azure_msp.ai_production_cli
+          examples/ai-release-evidence.json
+          --approval product-owner
+          --approval ai-operations
+          --approval financial-owner
+          --output /tmp/ai-release-report.json

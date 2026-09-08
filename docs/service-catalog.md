@@ -61,6 +61,18 @@ Indicative ranges: USD 7,500–25,000 for discovery and business case, USD 15,00
 migration foundation, USD 10,000–50,000 per wave and USD 20,000–150,000+ for application
 modernization. Actual pricing depends on scope, workload complexity, downtime and licensing.
 
+## AI production engineering and LLMOps
+
+- Multi-provider tracing and outcome-normalized evaluation
+- Model, prompt, retrieval and tool-policy release comparison
+- Loop detection, token/GPU economics and provider failover design
+- Shadow, canary and production gates integrated with Change Assurance
+- Business-value attribution integrated with FinOps Value Realization
+
+Indicative ranges: USD 5,000–15,000 for readiness, USD 15,000–50,000 for evaluation and
+instrumentation, USD 25,000–100,000 for production deployment and USD 5,000–25,000 monthly for
+managed AI SRE/LLMOps.
+
 ## Recovery assurance
 
 - Workload dependency and recovery contract

@@ -22,6 +22,7 @@ azure-msp-change = "azure_msp.change_cli:main"
 azure-msp-incident = "azure_msp.incident_cli:main"
 azure-msp-finops = "azure_msp.finops_cli:main"
 azure-msp-migration = "azure_msp.migration_cli:main"
+azure-msp-ai-release = "azure_msp.ai_production_cli:main"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

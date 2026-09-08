@@ -1,0 +1,35 @@
+{
+  "release_id": "support-agent-2026-09",
+  "workload_id": "customer-support-and-expansion",
+  "release_contract": {
+    "baseline_candidate_id": "foundry-balanced",
+    "minimum_completion_rate_pct": 90,
+    "minimum_quality_score": 0.88,
+    "minimum_groundedness_score": 0.9,
+    "minimum_correct_tool_rate_pct": 97,
+    "maximum_p95_latency_ms": 4500,
+    "maximum_loop_rate_pct": 10,
+    "maximum_provider_failure_rate_pct": 1,
+    "maximum_steps": 8,
+    "maximum_tool_repetitions": 2,
+    "required_approvers": ["product-owner", "ai-operations", "financial-owner"]
+  },
+  "candidates": [
+    {
+      "candidate_id": "foundry-balanced", "provider": "Microsoft Foundry", "model": "model-router-balanced", "requests": 1000, "completed_workflows": 930, "quality_score": 0.91, "groundedness_score": 0.93, "correct_tool_rate_pct": 98, "p95_latency_ms": 3800, "inference_cost_usd": 1800, "retrieval_cost_usd": 300, "revenue_generated_usd": 15000, "labor_avoided_usd": 2500, "human_escalation_cost_usd": 1000, "expected_error_cost_usd": 600, "provider_failures": 4,
+      "tool_sequences": [["retrieve", "crm", "respond"], ["retrieve", "ticket", "respond"], ["retrieve", "crm", "respond"], ["retrieve", "ticket", "respond"]]
+    },
+    {
+      "candidate_id": "cheap-local", "provider": "self-hosted-vLLM", "model": "small-open-model", "requests": 1000, "completed_workflows": 820, "quality_score": 0.82, "groundedness_score": 0.8, "correct_tool_rate_pct": 89, "p95_latency_ms": 2600, "inference_cost_usd": 500, "retrieval_cost_usd": 250, "revenue_generated_usd": 10000, "labor_avoided_usd": 1000, "human_escalation_cost_usd": 4000, "expected_error_cost_usd": 3000, "provider_failures": 2,
+      "tool_sequences": [["retrieve", "crm", "crm", "crm", "respond"], ["retrieve", "ticket", "respond"], ["retrieve", "retrieve", "retrieve", "respond"], ["retrieve", "crm", "respond"]]
+    },
+    {
+      "candidate_id": "nim-optimized", "provider": "NVIDIA NIM", "model": "enterprise-open-model", "requests": 1000, "completed_workflows": 940, "quality_score": 0.9, "groundedness_score": 0.92, "correct_tool_rate_pct": 98, "p95_latency_ms": 2900, "inference_cost_usd": 900, "retrieval_cost_usd": 280, "revenue_generated_usd": 16000, "labor_avoided_usd": 2800, "human_escalation_cost_usd": 700, "expected_error_cost_usd": 500, "provider_failures": 3,
+      "tool_sequences": [["retrieve", "crm", "respond"], ["retrieve", "ticket", "respond"], ["retrieve", "crm", "respond"], ["retrieve", "ticket", "respond"]]
+    },
+    {
+      "candidate_id": "frontier-quality", "provider": "Anthropic", "model": "frontier-model", "requests": 1000, "completed_workflows": 965, "quality_score": 0.96, "groundedness_score": 0.97, "correct_tool_rate_pct": 99, "p95_latency_ms": 4200, "inference_cost_usd": 2800, "retrieval_cost_usd": 300, "revenue_generated_usd": 18000, "labor_avoided_usd": 3000, "human_escalation_cost_usd": 500, "expected_error_cost_usd": 300, "provider_failures": 5,
+      "tool_sequences": [["retrieve", "crm", "respond"], ["retrieve", "ticket", "respond"], ["retrieve", "crm", "respond"], ["retrieve", "ticket", "respond"]]
+    }
+  ]
+}
