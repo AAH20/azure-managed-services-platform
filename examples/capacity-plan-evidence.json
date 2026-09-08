@@ -1,0 +1,31 @@
+{
+  "plan_id": "product-launch-capacity-2026-09",
+  "workload_id": "ecommerce-and-recommendations",
+  "forecast": {"peak_units_per_second": 1400, "upper_bound_units_per_second": 1600, "horizon_minutes": 120, "source_age_minutes": 12, "maximum_source_age_minutes": 30, "confidence_pct": 92, "minimum_confidence_pct": 85, "contribution_margin_per_unit_usd": 3.2},
+  "required_dependencies": ["aks-checkout", "sql-orders", "nat-egress", "azure-firewall", "nim-recommendation", "dr-checkout"],
+  "capacity_contract": {"required_approvers": ["product-owner", "capacity-engineering", "financial-owner"]},
+  "portfolios": [
+    {
+      "portfolio_id": "scale-aks-only", "title": "Increase AKS replicas and nodes only", "event_cost_usd": 6500, "implementation_cost_usd": 1200, "expected_abandonment_loss_usd": 85000, "expected_revenue_protected_usd": 125000, "reversible": true,
+      "dependencies": [
+        {"dependency_id": "aks-checkout", "capacity_units_per_second": 1800, "ready_in_minutes": 45, "quota_available": false, "load_test_passed": true},
+        {"dependency_id": "sql-orders", "capacity_units_per_second": 900, "ready_in_minutes": 10, "quota_available": true, "load_test_passed": false},
+        {"dependency_id": "nat-egress", "capacity_units_per_second": 1100, "ready_in_minutes": 5, "quota_available": true, "load_test_passed": false},
+        {"dependency_id": "azure-firewall", "capacity_units_per_second": 2400, "ready_in_minutes": 0, "quota_available": true, "load_test_passed": true},
+        {"dependency_id": "nim-recommendation", "capacity_units_per_second": 700, "ready_in_minutes": 240, "quota_available": false, "load_test_passed": false},
+        {"dependency_id": "dr-checkout", "capacity_units_per_second": 560, "ready_in_minutes": 60, "quota_available": true, "load_test_passed": false}
+      ]
+    },
+    {
+      "portfolio_id": "balanced-pre-scale", "title": "Pre-scale full dependency chain with AI fallback", "event_cost_usd": 18000, "implementation_cost_usd": 6500, "expected_abandonment_loss_usd": 4000, "expected_revenue_protected_usd": 210000, "reversible": true,
+      "dependencies": [
+        {"dependency_id": "aks-checkout", "capacity_units_per_second": 1900, "ready_in_minutes": 55, "quota_available": true, "load_test_passed": true},
+        {"dependency_id": "sql-orders", "capacity_units_per_second": 1750, "ready_in_minutes": 70, "quota_available": true, "load_test_passed": true},
+        {"dependency_id": "nat-egress", "capacity_units_per_second": 2200, "ready_in_minutes": 15, "quota_available": true, "load_test_passed": true},
+        {"dependency_id": "azure-firewall", "capacity_units_per_second": 2400, "ready_in_minutes": 0, "quota_available": true, "load_test_passed": true},
+        {"dependency_id": "nim-recommendation", "capacity_units_per_second": 1700, "ready_in_minutes": 90, "quota_available": true, "load_test_passed": true},
+        {"dependency_id": "dr-checkout", "capacity_units_per_second": 1650, "ready_in_minutes": 110, "quota_available": true, "load_test_passed": true}
+      ]
+    }
+  ]
+}

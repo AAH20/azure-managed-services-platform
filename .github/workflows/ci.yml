@@ -80,3 +80,10 @@ jobs:
           --approval revenue-operations
           --approval data-platform
           --output /tmp/data-report.json
+      - run: >-
+          python -m azure_msp.capacity_cli
+          examples/capacity-plan-evidence.json
+          --approval product-owner
+          --approval capacity-engineering
+          --approval financial-owner
+          --output /tmp/capacity-report.json

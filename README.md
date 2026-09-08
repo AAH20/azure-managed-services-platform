@@ -13,6 +13,7 @@ remediation**.
 [AI production engineering](docs/ai-production-engineering.md) ·
 [Network digital twin](docs/network-digital-twin.md) ·
 [Data reliability](docs/data-reliability.md) ·
+[Capacity engineering](docs/capacity-performance.md) ·
 [Service catalog](docs/service-catalog.md)
 
 ## Why this exists
@@ -42,6 +43,7 @@ This repository is the integration plane for that operating model. It currently 
 - multi-provider AI release economics, loop detection and evidence-gated model selection;
 - hybrid and multi-cloud connectivity intents with current/proposed path comparison;
 - semantic data contracts, lineage blast radius and evidence-gated publication;
+- forecast-driven cross-stack capacity portfolios with quota and load-test gates;
 - synthetic fixtures and tests that do not misrepresent a live Azure deployment.
 
 ## Demonstrated workflow
@@ -244,6 +246,23 @@ PYTHONPATH=src python -m azure_msp.data_cli \
 The pipeline technically succeeds, but a dollars-to-cents semantic change violates type, unit,
 range and reconciliation contracts. Publication and automated decisions are blocked; downstream
 Power BI, forecasting, inventory and agent consumers are listed. No data mutation is executed.
+
+## Capacity and performance proof
+
+Evaluate a synthetic product-launch capacity plan:
+
+```bash
+PYTHONPATH=src python -m azure_msp.capacity_cli \
+  examples/capacity-plan-evidence.json \
+  --approval product-owner \
+  --approval capacity-engineering \
+  --approval financial-owner \
+  --output evidence/capacity-report.json
+```
+
+The AKS-only plan is rejected because database, NAT, NIM, DR and quota constraints remain. A
+full-dependency pre-scale portfolio is eligible only for an isolated load test. Production scaling
+is not authorized and no cloud mutation is executed.
 
 ## Azure deployment building blocks
 

@@ -96,6 +96,18 @@ network reliability.
 Indicative ranges: USD 7,500–25,000 for assessment, USD 20,000–75,000 for contracts and lineage,
 USD 30,000–150,000 for data-platform reliability and USD 5,000–25,000 monthly for managed DataOps.
 
+## Capacity and performance engineering
+
+- Forecast validation and full-dependency capacity modeling
+- AKS, VM, database, network, queue, GPU and DR capacity analysis
+- Quota, regional availability and provisioning-time assurance
+- Isolated load testing and revenue-aware portfolio comparison
+- Change Assurance and post-event FinOps verification
+
+Indicative ranges: USD 7,500–25,000 for assessment, USD 20,000–75,000 for predictive capacity,
+USD 25,000–150,000 for AI/GPU capacity engineering and USD 5,000–25,000 monthly for managed
+capacity SRE.
+
 ## Recovery assurance
 
 - Workload dependency and recovery contract
