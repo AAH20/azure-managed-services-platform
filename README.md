@@ -11,6 +11,7 @@ remediation**.
 [FinOps value realization](docs/finops-value-realization.md) ·
 [Migration and modernization](docs/migration-modernization-factory.md) ·
 [AI production engineering](docs/ai-production-engineering.md) ·
+[Network digital twin](docs/network-digital-twin.md) ·
 [Service catalog](docs/service-catalog.md)
 
 ## Why this exists
@@ -38,6 +39,7 @@ This repository is the integration plane for that operating model. It currently 
 - an intentionally empty verified-savings ledger until post-change billing proves value;
 - dependency-aware 6R migration assessment, cutover gates and protected decommissioning;
 - multi-provider AI release economics, loop detection and evidence-gated model selection;
+- hybrid and multi-cloud connectivity intents with current/proposed path comparison;
 - synthetic fixtures and tests that do not misrepresent a live Azure deployment.
 
 ## Demonstrated workflow
@@ -206,6 +208,23 @@ PYTHONPATH=src python -m azure_msp.ai_production_cli \
 The inexpensive self-hosted candidate is rejected because completion, quality, groundedness, tool
 correctness, loops and net contribution regress. The highest-value eligible candidate advances
 only to shadow evaluation. Production promotion remains unauthorized and zero cloud changes run.
+
+## Network digital-twin proof
+
+Evaluate a synthetic Terraform network change before deployment:
+
+```bash
+PYTHONPATH=src python -m azure_msp.network_cli \
+  examples/network-change-evidence.json \
+  --approval network-owner \
+  --approval application-owner \
+  --approval cloud-operations \
+  --output evidence/network-report.json
+```
+
+The proposed state sends checkout traffic to a wrong next hop, resolves a private SQL endpoint
+publicly and loses the DR return route. The change is blocked, the responsible controls remain in
+the evidence report and production deployment is not authorized. No cloud mutation is executed.
 
 ## Azure deployment building blocks
 

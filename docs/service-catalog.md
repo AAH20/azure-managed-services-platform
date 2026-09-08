@@ -73,6 +73,18 @@ Indicative ranges: USD 5,000–15,000 for readiness, USD 15,000–50,000 for eva
 instrumentation, USD 25,000–100,000 for production deployment and USD 5,000–25,000 monthly for
 managed AI SRE/LLMOps.
 
+## Hybrid and multi-cloud network assurance
+
+- Business connectivity-intent catalog
+- Azure, hybrid, AWS/GCP and network-device path evidence
+- Pre-change reachability, DNS, inspection and return-path analysis
+- Terraform/OpenTofu, Ansible and firewall change assurance
+- Application and revenue blast-radius reporting
+
+Indicative ranges: USD 7,500–25,000 for discovery, USD 15,000–50,000 for intent implementation,
+USD 30,000–150,000 for a hybrid/multi-cloud network twin and USD 5,000–25,000 monthly for managed
+network reliability.
+
 ## Recovery assurance
 
 - Workload dependency and recovery contract

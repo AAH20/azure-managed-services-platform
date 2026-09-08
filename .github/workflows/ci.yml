@@ -66,3 +66,10 @@ jobs:
           --approval ai-operations
           --approval financial-owner
           --output /tmp/ai-release-report.json
+      - run: >-
+          python -m azure_msp.network_cli
+          examples/network-change-evidence.json
+          --approval network-owner
+          --approval application-owner
+          --approval cloud-operations
+          --output /tmp/network-report.json

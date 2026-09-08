@@ -1,0 +1,18 @@
+{
+  "change_id": "terraform-network-pr-218",
+  "customer_id": "contoso-retail",
+  "change_contract": {"required_approvers": ["network-owner", "application-owner", "cloud-operations"]},
+  "connectivity_intents": [
+    {"intent_id": "checkout-to-orders", "business_service": "ecommerce-checkout", "source": "aks/checkout", "destination": "private-endpoint/orders-sql", "protocol": "tcp", "port": 1433, "must_be_reachable": true, "required_transit": ["azure-firewall"], "prohibited_transit": ["public-internet"], "expected_dns_scope": "private", "maximum_latency_ms": 30, "contribution_margin_per_hour_usd": 18000},
+    {"intent_id": "internet-to-admin", "business_service": "platform-management", "source": "public-internet", "destination": "aks/admin", "protocol": "tcp", "port": 443, "must_be_reachable": false, "required_transit": [], "prohibited_transit": [], "expected_dns_scope": "not-applicable", "maximum_latency_ms": 100, "contribution_margin_per_hour_usd": 0},
+    {"intent_id": "branch-to-checkout-dr", "business_service": "ecommerce-checkout-dr", "source": "branch-sdwan", "destination": "aks-dr/checkout", "protocol": "tcp", "port": 443, "must_be_reachable": true, "required_transit": ["expressroute", "azure-firewall-dr"], "prohibited_transit": ["public-internet"], "expected_dns_scope": "private", "maximum_latency_ms": 80, "contribution_margin_per_hour_usd": 12000}
+  ],
+  "path_observations": [
+    {"snapshot": "current", "intent_id": "checkout-to-orders", "reachable": true, "return_reachable": true, "path": ["aks-subnet", "azure-firewall", "private-endpoint"], "resolved_address": "10.40.2.5", "dns_scope": "private", "latency_ms": 12, "blocking_control": null},
+    {"snapshot": "proposed", "intent_id": "checkout-to-orders", "reachable": false, "return_reachable": false, "path": ["aks-subnet", "nva-wrong-next-hop"], "resolved_address": "20.50.60.70", "dns_scope": "public", "latency_ms": null, "blocking_control": "route-table/checkout/10.40.2.0-24-via-nva"},
+    {"snapshot": "current", "intent_id": "internet-to-admin", "reachable": false, "return_reachable": false, "path": ["public-internet", "application-gateway"], "resolved_address": null, "dns_scope": "not-applicable", "latency_ms": null, "blocking_control": "nsg/admin/deny-internet"},
+    {"snapshot": "proposed", "intent_id": "internet-to-admin", "reachable": false, "return_reachable": false, "path": ["public-internet", "application-gateway"], "resolved_address": null, "dns_scope": "not-applicable", "latency_ms": null, "blocking_control": "nsg/admin/deny-internet"},
+    {"snapshot": "current", "intent_id": "branch-to-checkout-dr", "reachable": true, "return_reachable": true, "path": ["branch-sdwan", "expressroute", "azure-firewall-dr", "aks-dr"], "resolved_address": "10.90.1.10", "dns_scope": "private", "latency_ms": 52, "blocking_control": null},
+    {"snapshot": "proposed", "intent_id": "branch-to-checkout-dr", "reachable": true, "return_reachable": false, "path": ["branch-sdwan", "expressroute", "azure-firewall-dr", "aks-dr"], "resolved_address": "10.90.1.10", "dns_scope": "private", "latency_ms": 58, "blocking_control": "bgp/return-prefix-not-advertised"}
+  ]
+}
