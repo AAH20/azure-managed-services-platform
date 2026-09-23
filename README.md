@@ -21,6 +21,7 @@ remediation**.
 [InferenceFleet](docs/inference-fleet.md) ·
 [Backup Resolution](docs/backup-resolution.md) ·
 [Resolution Network](docs/resolution-network.md) ·
+[Service Delivery Cloud](docs/service-delivery-cloud.md) ·
 [Service catalog](docs/service-catalog.md)
 
 ## Why this exists
@@ -59,6 +60,7 @@ This repository is the integration plane for that operating model. It currently 
 - an order-bound, pinned single-GPU vLLM deployment plan and benchmark-based release/rollback decision.
 - a scoped Azure VM backup workcell with read-only diagnosis, reviewed retry and new-point verification.
 - a versioned local workcell runner with deduplicated alert ingestion and persistent case history.
+- a local partner pilot workflow for one scoped Azure VM, contract-bound activation, customer-safe case reporting and draft service economics.
 
 The [managed AI operations slice](docs/managed-ai-operations.md) probes an operator-specified
 OpenAI-compatible endpoint and reports sampled success and latency. It has been tested against a

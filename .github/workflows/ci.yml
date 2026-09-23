@@ -26,6 +26,7 @@ jobs:
       - run: python -m azure_msp.inference_fleet_cli --help
       - run: python -m azure_msp.backup_resolution_cli --help
       - run: python -m azure_msp.resolution_network_cli --help
+      - run: python -m azure_msp.service_delivery_cli --help
       - run: >-
           python -m azure_msp.recovery_cli
           examples/recovery-contract.json
