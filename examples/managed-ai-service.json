@@ -1,0 +1,11 @@
+{
+  "service_id": "example-private-ai",
+  "customer": "Fictional Customer",
+  "base_url": "http://127.0.0.1:8000",
+  "model": "Qwen/Qwen3-0.6B",
+  "owner": "A2Z AI Operations",
+  "minimum_samples_per_month": 7000,
+  "minimum_sample_success_pct": 99.0,
+  "maximum_p95_latency_ms": 2000,
+  "maximum_p95_ttft_ms": 1000
+}

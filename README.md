@@ -16,6 +16,7 @@ remediation**.
 [Capacity engineering](docs/capacity-performance.md) ·
 [Commercial control plane](docs/commercial-control-plane.md) ·
 [AI unit economics](docs/ai-unit-economics-gateway.md) ·
+[Managed AI operations](docs/managed-ai-operations.md) ·
 [Service catalog](docs/service-catalog.md)
 
 ## Why this exists
@@ -49,6 +50,12 @@ This repository is the integration plane for that operating model. It currently 
 - contract-driven tenant lifecycle, isolation, entitlement and Marketplace revenue gates;
 - trace-to-outcome AI cost allocation, retry-waste detection and review-gated model routing;
 - synthetic fixtures and tests that do not misrepresent a live Azure deployment.
+- an opt-in, read-only live inference probe with local observation storage and monthly static report.
+
+The [managed AI operations slice](docs/managed-ai-operations.md) probes an operator-specified
+OpenAI-compatible endpoint and reports sampled success and latency. It has been tested against a
+local test server, not a customer GPU deployment. It does not yet provide a hosted portal, on-call
+service, billing integration or customer SLA.
 
 ## Demonstrated workflow
 
