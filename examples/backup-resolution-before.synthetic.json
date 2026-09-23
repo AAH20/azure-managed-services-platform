@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "source_status": "observed",
+  "account_verified": true,
+  "scope": {
+    "incident_id": "backup-incident-1",
+    "tenant_id": "00000000-0000-0000-0000-000000000001",
+    "subscription_id": "00000000-0000-0000-0000-000000000002",
+    "resource_group": "pilot-rg",
+    "vault_name": "pilot-vault",
+    "vm_name": "pilot-vm"
+  },
+  "jobs": [
+    {"job_id": "old-failed-job", "operation": "Backup", "status": "Failed", "started_at": "2026-09-20T10:00:00Z", "ended_at": "2026-09-20T10:04:00Z", "error_code": "SyntheticFailure"}
+  ],
+  "item": {"name": "pilot-vm", "properties": {"protectionState": "Protected"}},
+  "recovery_points": [
+    {"point_id": "old-point", "created_at": "2026-09-19T10:00:00Z"}
+  ],
+  "collected_at": "2026-09-20T10:05:00Z",
+  "receipts": []
+}

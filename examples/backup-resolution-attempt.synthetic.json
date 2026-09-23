@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "scope": {
+    "incident_id": "backup-incident-1",
+    "tenant_id": "00000000-0000-0000-0000-000000000001",
+    "subscription_id": "00000000-0000-0000-0000-000000000002",
+    "resource_group": "pilot-rg",
+    "vault_name": "pilot-vault",
+    "vm_name": "pilot-vm"
+  },
+  "action": "backup-now",
+  "started_at": "2026-09-20T10:06:00Z",
+  "cli_returncode": 0,
+  "request_status": "accepted",
+  "request_job_id": "new-completed-job",
+  "mutation_attempted": true
+}
