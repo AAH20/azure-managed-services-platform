@@ -30,6 +30,7 @@ jobs:
       - run: python -m azure_msp.recovery_operator_cli --help
       - run: python -m azure_msp.ai_service_operator_cli --help
       - run: python -m azure_msp.production_resolution_cli --help
+      - run: python -m azure_msp.customer_gateway_cli --help
       - run: >-
           python -m azure_msp.ai_service_operator_cli evaluate
           examples/ai-service-contract.synthetic.json

@@ -1,0 +1,19 @@
+{
+  "customer_id": "customer-a",
+  "scope": {
+    "incident_id": "backup-incident-1",
+    "tenant_id": "00000000-0000-0000-0000-000000000001",
+    "subscription_id": "00000000-0000-0000-0000-000000000002",
+    "resource_group": "pilot-rg",
+    "vault_name": "pilot-vault",
+    "vm_name": "pilot-vm"
+  },
+  "recipe": {
+    "workcell_id": "azure-vm-backup-resolution",
+    "version": "0.1.0",
+    "adapter": "azure_vm_backup_v1",
+    "alert_schema": "azureMonitorCommonAlertSchema",
+    "target_resource_type": "Microsoft.RecoveryServices/vaults",
+    "description": "Reviewed backup retry and new recovery point verification for one Azure IaaS VM"
+  }
+}
