@@ -8,6 +8,7 @@ import math
 import re
 import sqlite3
 import time
+from contextlib import closing
 from datetime import UTC, datetime
 from html import escape
 from pathlib import Path
@@ -145,12 +146,15 @@ def monthly_report(db_path: Path, service: dict, month: str) -> dict:
     if not db_path.exists():
         rows = []
     else:
-        with sqlite3.connect(db_path) as conn:
+        with closing(sqlite3.connect(db_path)) as conn:
+            has_probes = conn.execute(
+                "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'probes'"
+            ).fetchone()
             rows = conn.execute(
                 "SELECT observed_at, ok, latency_ms, ttft_ms, error FROM probes "
                 "WHERE service_id = ? AND observed_at >= ? AND observed_at < ? ORDER BY observed_at",
                 (service["service_id"], month + "-01", _next_month(month) + "-01"),
-            ).fetchall()
+            ).fetchall() if has_probes else []
     successes = [row for row in rows if row[1]]
     rate = round(len(successes) / len(rows) * 100, 2) if rows else None
     latency = _p95([row[2] for row in successes])

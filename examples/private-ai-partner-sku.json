@@ -1,0 +1,16 @@
+{
+  "sku": "private-inference-1gpu",
+  "model": "Qwen/Qwen3-0.6B",
+  "operator_owner": "A2Z AI Operations",
+  "allowed_regions": ["customer-private-cloud"],
+  "retail_setup_usd": "3000.00",
+  "wholesale_setup_usd": "2400.00",
+  "retail_monthly_usd": "2500.00",
+  "wholesale_monthly_usd": "2000.00",
+  "service_targets": {
+    "minimum_samples_per_month": 7000,
+    "minimum_sample_success_pct": 99.0,
+    "maximum_p95_latency_ms": 2000,
+    "maximum_p95_ttft_ms": 1000
+  }
+}
