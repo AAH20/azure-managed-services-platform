@@ -24,6 +24,7 @@ remediation**.
 [Service Delivery Cloud](docs/service-delivery-cloud.md) ·
 [Recovery Operator](docs/recovery-operator.md) ·
 [AI Service Operator](docs/ai-service-operator.md) ·
+[Production Resolution Operator](docs/production-resolution-operator.md) ·
 [Service catalog](docs/service-catalog.md)
 
 ## Why this exists
@@ -65,6 +66,7 @@ This repository is the integration plane for that operating model. It currently 
 - a local partner pilot workflow for one scoped Azure VM, contract-bound activation, customer-safe case reporting and draft service economics.
 - an application-level recovery drill evaluator with an opt-in HTTPS transaction probe and pilot-scoped durable result.
 - a paired AI endpoint benchmark that compares accepted work, latency, reliability and test-window cost for partner service decisions.
+- a guarded operator path from Azure backup alert to reviewed retry, verified new recovery point, and attached restore drill.
 
 The [managed AI operations slice](docs/managed-ai-operations.md) probes an operator-specified
 OpenAI-compatible endpoint and reports sampled success and latency. It has been tested against a
