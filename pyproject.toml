@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "azure-managed-services-platform"
-version = "0.8.0"
+version = "0.9.0"
 description = "Evidence-driven Azure and hybrid-cloud operations for managed service providers"
 requires-python = ">=3.11"
 license = {text = "Apache-2.0"}
@@ -35,6 +35,7 @@ azure-msp-backup-resolution = "azure_msp.backup_resolution_cli:main"
 azure-msp-resolution-network = "azure_msp.resolution_network_cli:main"
 azure-msp-service-delivery = "azure_msp.service_delivery_cli:main"
 azure-msp-recovery-operator = "azure_msp.recovery_operator_cli:main"
+azure-msp-ai-service = "azure_msp.ai_service_operator_cli:main"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

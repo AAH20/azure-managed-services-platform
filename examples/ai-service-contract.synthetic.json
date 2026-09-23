@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "partner_id": "partner-a",
+  "order_id": "ord-synthetic",
+  "workload_id": "support-answer",
+  "workload_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "targets": {
+    "minimum_requests": 3,
+    "minimum_success_pct": 95,
+    "minimum_acceptance_pct": 90,
+    "maximum_p95_latency_ms": 700,
+    "maximum_p95_ttft_ms": 200,
+    "maximum_cost_per_accepted_usd": "0.08"
+  }
+}

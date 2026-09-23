@@ -1,0 +1,28 @@
+{
+  "baseline": {
+    "provider": "hosted-api",
+    "model": "baseline-model",
+    "workload_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "gpu_hours": "0",
+    "gpu_hour_usd": "0",
+    "other_fixed_usd": "0",
+    "events": [
+      {"scenario_id":"case-a","ok":true,"accepted":true,"acceptance_ref":"synthetic-review-a","latency_ms":700,"ttft_ms":180,"output_tokens":120,"request_cost_usd":"0.12"},
+      {"scenario_id":"case-b","ok":true,"accepted":false,"acceptance_ref":null,"latency_ms":900,"ttft_ms":210,"output_tokens":110,"request_cost_usd":"0.12"},
+      {"scenario_id":"case-c","ok":true,"accepted":true,"acceptance_ref":"synthetic-review-c","latency_ms":800,"ttft_ms":190,"output_tokens":130,"request_cost_usd":"0.12"}
+    ]
+  },
+  "candidate": {
+    "provider": "byoc-vllm",
+    "model": "Qwen/Qwen3-0.6B",
+    "workload_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "gpu_hours": "0.1",
+    "gpu_hour_usd": "1.00",
+    "other_fixed_usd": "0.02",
+    "events": [
+      {"scenario_id":"case-a","ok":true,"accepted":true,"acceptance_ref":"synthetic-review-a2","latency_ms":500,"ttft_ms":120,"output_tokens":120,"request_cost_usd":"0.01"},
+      {"scenario_id":"case-b","ok":true,"accepted":true,"acceptance_ref":"synthetic-review-b2","latency_ms":600,"ttft_ms":150,"output_tokens":115,"request_cost_usd":"0.01"},
+      {"scenario_id":"case-c","ok":true,"accepted":true,"acceptance_ref":"synthetic-review-c2","latency_ms":550,"ttft_ms":130,"output_tokens":130,"request_cost_usd":"0.01"}
+    ]
+  }
+}
