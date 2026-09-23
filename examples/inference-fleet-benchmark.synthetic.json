@@ -1,0 +1,32 @@
+{
+  "order_id": "ord-syntheticexample",
+  "baseline": {
+    "workload_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "gpu_profile": "single-test-gpu",
+    "requests": 1000,
+    "success_pct": 99.5,
+    "p95_latency_ms": 1200,
+    "p95_ttft_ms": 500,
+    "output_tokens": 5000,
+    "gpu_hours": 0.5,
+    "gpu_hour_usd": "2.00"
+  },
+  "candidate": {
+    "workload_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "gpu_profile": "single-test-gpu",
+    "requests": 1000,
+    "success_pct": 98.0,
+    "p95_latency_ms": 1800,
+    "p95_ttft_ms": 700,
+    "output_tokens": 5000,
+    "gpu_hours": 0.6,
+    "gpu_hour_usd": "2.00"
+  },
+  "targets": {
+    "minimum_requests": 1000,
+    "minimum_success_pct": 99.0,
+    "maximum_p95_latency_ms": 1500,
+    "maximum_p95_ttft_ms": 600,
+    "maximum_cost_per_million_output_tokens_usd": 220
+  }
+}

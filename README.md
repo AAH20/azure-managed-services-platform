@@ -18,6 +18,7 @@ remediation**.
 [AI unit economics](docs/ai-unit-economics-gateway.md) ·
 [Managed AI operations](docs/managed-ai-operations.md) ·
 [Private AI Partner Cloud](docs/private-ai-partner-cloud.md) ·
+[InferenceFleet](docs/inference-fleet.md) ·
 [Service catalog](docs/service-catalog.md)
 
 ## Why this exists
@@ -53,6 +54,7 @@ This repository is the integration plane for that operating model. It currently 
 - synthetic fixtures and tests that do not misrepresent a live Azure deployment.
 - an opt-in, read-only live inference probe with local observation storage and monthly static report.
 - a loopback, single-SKU partner ordering API with partner-scoped orders, operator activation and draft monthly statements.
+- an order-bound, pinned single-GPU vLLM deployment plan and benchmark-based release/rollback decision.
 
 The [managed AI operations slice](docs/managed-ai-operations.md) probes an operator-specified
 OpenAI-compatible endpoint and reports sampled success and latency. It has been tested against a

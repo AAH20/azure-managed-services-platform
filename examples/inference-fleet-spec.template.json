@@ -1,0 +1,9 @@
+{
+  "namespace": "customer-inference",
+  "cache_pvc": "model-cache",
+  "hf_token_secret": "hf-read-token",
+  "image": "REPLACE_WITH_VLLM_IMAGE_PINNED_BY_SHA256_DIGEST",
+  "model_revision": "REPLACE_WITH_40_CHARACTER_MODEL_COMMIT_SHA",
+  "max_model_len": 2048,
+  "gpu_count": 1
+}
