@@ -1,0 +1,14 @@
+{
+  "schemaId": "azureMonitorCommonAlertSchema",
+  "data": {
+    "essentials": {
+      "alertId": "synthetic-alert-001",
+      "monitorCondition": "Fired",
+      "firedDateTime": "2026-09-20T10:04:00Z",
+      "severity": "Sev2",
+      "alertTargetIDs": [
+        "/subscriptions/00000000-0000-0000-0000-000000000002/resourceGroups/pilot-rg/providers/Microsoft.RecoveryServices/vaults/pilot-vault"
+      ]
+    }
+  }
+}

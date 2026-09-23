@@ -189,6 +189,9 @@ def retry_backup(scope: dict, plan: dict, current: dict, approvals: set[str],
             "started_at": started, "cli_returncode": result.returncode,
             "request_status": "accepted" if result.returncode == 0 else "unknown",
             "request_job_id": job_id,
+            "based_on_failed_job_id": plan["failed_job_id"],
+            "plan_snapshot_sha256": plan["snapshot_sha256"],
+            "declared_approvals": sorted(approvals),
             "mutation_attempted": True,
             "boundary": "CLI acceptance is not a completed backup. Verification requires the returned job ID, a later completed job, and a new recovery point."}
 

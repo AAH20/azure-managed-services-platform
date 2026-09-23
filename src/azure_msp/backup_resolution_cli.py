@@ -73,6 +73,7 @@ def main() -> int:
                 raise BackupResolutionError("plan is not bound to the supplied before snapshot")
             current = collect_snapshot(scope)
             result = retry_backup(scope, plan_value, current, set(args.approval), AzureCliRunner())
+            result["cause_reviewed_declared"] = True
         else:
             result = verify(_read(args.before), _read(args.after), _read(args.attempt))
         _write(args.output, result)

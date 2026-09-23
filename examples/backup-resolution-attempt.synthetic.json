@@ -13,5 +13,12 @@
   "cli_returncode": 0,
   "request_status": "accepted",
   "request_job_id": "new-completed-job",
+  "based_on_failed_job_id": "old-failed-job",
+  "plan_snapshot_sha256": "3f1f2041bb413ac69757e607623f9d806ac1adf9dfc26d8a7431595ccf268376",
+  "declared_approvals": [
+    "workload-owner",
+    "backup-operator"
+  ],
+  "cause_reviewed_declared": true,
   "mutation_attempted": true
 }
