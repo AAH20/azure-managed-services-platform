@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "workload_id": "pilot-checkout",
+  "environment_id": "isolated-drill-1",
+  "scope": {
+    "incident_id": "backup-incident-1",
+    "tenant_id": "00000000-0000-0000-0000-000000000001",
+    "subscription_id": "00000000-0000-0000-0000-000000000002",
+    "resource_group": "pilot-rg",
+    "vault_name": "pilot-vault",
+    "vm_name": "pilot-vm"
+  },
+  "rto_minutes": 60,
+  "rpo_minutes": 30,
+  "probe": {
+    "url": "https://example.invalid/health",
+    "json_path": "checkout.status",
+    "equals": "ready"
+  }
+}

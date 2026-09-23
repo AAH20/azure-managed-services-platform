@@ -45,6 +45,18 @@ def initialize(db: Path) -> None:
             work_id TEXT PRIMARY KEY, pilot_id TEXT NOT NULL, case_id TEXT NOT NULL,
             minutes INTEGER NOT NULL, note TEXT NOT NULL, recorded_at TEXT NOT NULL,
             FOREIGN KEY(pilot_id) REFERENCES delivery_pilots(pilot_id))""")
+        conn.execute("""CREATE TABLE IF NOT EXISTS recovery_drills (
+            source_sha256 TEXT NOT NULL, pilot_id TEXT NOT NULL, workload_id TEXT NOT NULL,
+            outcome TEXT NOT NULL, elapsed_to_probe_seconds INTEGER NOT NULL,
+            actual_rto_seconds INTEGER,
+            actual_rpo_seconds INTEGER NOT NULL, checked_at TEXT NOT NULL,
+            PRIMARY KEY(pilot_id, source_sha256),
+            FOREIGN KEY(pilot_id) REFERENCES delivery_pilots(pilot_id))""")
+        conn.execute("""CREATE TABLE IF NOT EXISTS recovery_followups (
+            pilot_id TEXT NOT NULL, source_sha256 TEXT NOT NULL,
+            state TEXT NOT NULL, created_at TEXT NOT NULL,
+            PRIMARY KEY(pilot_id, source_sha256),
+            FOREIGN KEY(pilot_id, source_sha256) REFERENCES recovery_drills(pilot_id, source_sha256))""")
 
 
 def _row(row: sqlite3.Row) -> dict:
@@ -185,6 +197,7 @@ def _report(db: Path, pilot_id: str, month: str) -> dict:
     if not isinstance(month, str) or not MONTH.fullmatch(month):
         raise DeliveryError("month must be YYYY-MM")
     pilot = _pilot(db, pilot_id)
+    initialize(db)
     with closing(sqlite3.connect(db)) as conn:
         conn.row_factory = sqlite3.Row
         rows = conn.execute("SELECT case_id,state,created_at,scope_json,outcome_json FROM cases "
@@ -193,6 +206,10 @@ def _report(db: Path, pilot_id: str, month: str) -> dict:
         work = conn.execute("SELECT minutes FROM delivery_work WHERE pilot_id=? AND "
                             "recorded_at >= ? AND recorded_at < ?",
                             (pilot_id, month + "-01", _next_month(month))).fetchall()
+        drills = conn.execute("""SELECT workload_id,outcome,elapsed_to_probe_seconds,actual_rto_seconds,
+            actual_rpo_seconds,checked_at FROM recovery_drills WHERE pilot_id=? AND
+            checked_at >= ? AND checked_at < ? ORDER BY checked_at""",
+            (pilot_id, month + "-01", _next_month(month))).fetchall()
     cases = []
     for row in rows:
         if all(pilot["scope"][key] == json.loads(row["scope_json"])[key] for key in RESOURCE_KEYS):
@@ -207,7 +224,8 @@ def _report(db: Path, pilot_id: str, month: str) -> dict:
     fee = _cents(pilot["monthly_fee_usd"], "monthly_fee_usd") if active else 0
     return {"pilot_id": pilot_id, "customer_id": pilot["customer_id"], "month": month,
             "currency": "USD", "state": pilot["state"], "cases": cases,
-            "case_count": len(cases), "operator_minutes": minutes,
+            "case_count": len(cases), "recovery_drills": [dict(row) for row in drills],
+            "operator_minutes": minutes,
             "estimated_operator_labor_usd": _usd(labor),
             "draft_customer_charge_usd": _usd(fee),
             "estimated_contribution_after_operator_labor_usd": _usd(fee - labor),

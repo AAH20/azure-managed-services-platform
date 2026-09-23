@@ -27,6 +27,13 @@ jobs:
       - run: python -m azure_msp.backup_resolution_cli --help
       - run: python -m azure_msp.resolution_network_cli --help
       - run: python -m azure_msp.service_delivery_cli --help
+      - run: python -m azure_msp.recovery_operator_cli --help
+      - run: >-
+          python -m azure_msp.recovery_operator_cli evaluate
+          examples/recovery-operator-contract.synthetic.json
+          examples/recovery-operator-restore.synthetic.json
+          examples/recovery-operator-probe.synthetic.json
+          --output /tmp/recovery-operator-report.json
       - run: >-
           python -m azure_msp.recovery_cli
           examples/recovery-contract.json

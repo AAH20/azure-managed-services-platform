@@ -1,0 +1,9 @@
+{
+  "checked_at": "2026-09-20T10:27:00Z",
+  "passed": true,
+  "reason": "assertion_passed",
+  "http_status": 200,
+  "latency_ms": 41.5,
+  "response_sha256": "synthetic-not-a-real-response-hash",
+  "probe_url": "https://example.invalid/health"
+}
