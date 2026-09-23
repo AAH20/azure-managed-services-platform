@@ -14,6 +14,10 @@ resource serviceBusNamespace 'Microsoft.ServiceBus/namespaces@2024-01-01' = {
   location: location
   sku: {
     name: 'Standard'
+    tier: 'Standard'
+  }
+  properties: {
+    disableLocalAuth: true
   }
 
   resource queue 'queues' = {

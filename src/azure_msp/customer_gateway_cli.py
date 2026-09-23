@@ -11,6 +11,7 @@ import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
+from .azure_service_bus_gateway import consume_forever, consume_once, publish_file
 from .customer_gateway import (
     GatewayError,
     enqueue,
@@ -79,7 +80,7 @@ def serve(db: Path, config: dict, key: str, host: str, port: int) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Single-customer local operations gateway")
+    parser = argparse.ArgumentParser(description="Single-customer operations gateway")
     parser.add_argument("--db", type=Path, default=Path("evidence/customer-gateway.sqlite3"))
     parser.add_argument("--config", type=Path, required=True)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -90,6 +91,18 @@ def main() -> None:
     replay.add_argument("alert", type=Path)
     sub.add_parser("work-once", help="Lease one alert and open an idempotent case")
     sub.add_parser("status", help="Show local queue counts")
+    bus_send = sub.add_parser("bus-send-file", help="Publish an authorized file to Azure Service Bus")
+    bus_send.add_argument("alert", type=Path)
+    bus_send.add_argument("--namespace", required=True)
+    bus_send.add_argument("--queue", default="a2z-operations-alerts")
+    for name, help_text in (
+        ("bus-work-once", "Receive one Service Bus alert and open a case"),
+        ("bus-work", "Continuously receive Service Bus alerts until stopped"),
+    ):
+        bus_work = sub.add_parser(name, help=help_text)
+        bus_work.add_argument("--namespace", required=True)
+        bus_work.add_argument("--queue", default="a2z-operations-alerts")
+        bus_work.add_argument("--wait", type=int, default=10)
     args = parser.parse_args()
     config = validate_config(json.loads(args.config.read_text(encoding="utf-8")))
     if args.command == "serve":
@@ -103,6 +116,16 @@ def main() -> None:
                          signature=sign_payload(key, timestamp, nonce, body), key=key)
     elif args.command == "work-once":
         result = work_once(args.db, config)
+    elif args.command == "bus-send-file":
+        result = publish_file(args.namespace, args.queue, config, args.alert.read_bytes())
+    elif args.command == "bus-work-once":
+        result = consume_once(args.namespace, args.queue, args.db, config, wait=args.wait)
+    elif args.command == "bus-work":
+        try:
+            consume_forever(args.namespace, args.queue, args.db, config, wait=args.wait,
+                            on_result=lambda item: print(json.dumps(item, sort_keys=True), flush=True))
+        except KeyboardInterrupt:
+            return
     else:
         result = queue_status(args.db, config)
     print(json.dumps(result, indent=2, sort_keys=True))

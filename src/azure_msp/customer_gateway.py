@@ -153,4 +153,4 @@ def queue_status(db: Path, config: dict) -> dict:
     _bind_config(db, config)
     with closing(sqlite3.connect(db)) as conn:
         rows = conn.execute("SELECT state,COUNT(*) FROM gateway_messages GROUP BY state").fetchall()
-    return {"counts": dict(rows), "boundary": "Local SQLite queue only; no Azure Service Bus adapter or hosted ingress is active."}
+    return {"counts": dict(rows), "boundary": "Counts cover the local HMAC inbox only; Service Bus cases use the case ledger. No hosted ingress is active."}

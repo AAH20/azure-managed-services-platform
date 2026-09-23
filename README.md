@@ -69,6 +69,7 @@ This repository is the integration plane for that operating model. It currently 
 - a paired AI endpoint benchmark that compares accepted work, latency, reliability and test-window cost for partner service decisions.
 - a guarded operator path from Azure backup alert to reviewed retry, verified new recovery point, and attached restore drill.
 - a single-customer authenticated local alert inbox with durable deduplication and a case-opening worker.
+- an optional managed-identity Service Bus transport that opens scoped cases from customer queue messages.
 
 The [managed AI operations slice](docs/managed-ai-operations.md) probes an operator-specified
 OpenAI-compatible endpoint and reports sampled success and latency. It has been tested against a
